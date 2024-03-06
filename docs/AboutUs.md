@@ -11,7 +11,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[Github](https://github.com/reetmitra)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Bui Hong Duc
 
@@ -19,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[Github](https://github.com/E0735389)]
 
-* Role: Team Lead
+* Role: Team Developer
 * Responsibilities: UI
 
 ### Chong Chan How
@@ -47,4 +48,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[Github](https://github.com/Hibeom0929)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and Deadlines 
