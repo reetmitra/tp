@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[Github](https://github.com/reetmitra)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: Testing
 
 ### Bui Hong Duc
 
@@ -39,7 +39,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[Github](https://github.com/LargeCrowd)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation
 
 ### Yang Heebom
 
