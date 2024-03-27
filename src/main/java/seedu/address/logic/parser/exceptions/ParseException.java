@@ -60,4 +60,12 @@ public class ParseException extends IllegalValueException {
     public ParseException(String message, Throwable cause) {
         this(message, cause, Optional.empty());
     }
+
+    /**
+     * Gets the part of the command that causes the error.
+     * @return The part of the command that causes the error.
+     */
+    public Optional<CommandPart> getCommandPart() {
+        return commandPart;
+    }
 }

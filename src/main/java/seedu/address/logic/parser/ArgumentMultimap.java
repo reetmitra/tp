@@ -20,7 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ArgumentMultimap {
 
     /** Prefixes mapped to their respective arguments**/
-    private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
+    private final Map<Prefix, List<CommandPart>> argMultimap = new HashMap<>();
 
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
@@ -29,8 +29,8 @@ public class ArgumentMultimap {
      * @param prefix   Prefix key with which the specified argument value is to be associated
      * @param argValue Argument value to be associated with the specified prefix key
      */
-    public void put(Prefix prefix, String argValue) {
-        List<String> argValues = getAllValues(prefix);
+    public void put(Prefix prefix, CommandPart argValue) {
+        List<CommandPart> argValues = getAllValues(prefix);
         argValues.add(argValue);
         argMultimap.put(prefix, argValues);
     }
@@ -38,8 +38,8 @@ public class ArgumentMultimap {
     /**
      * Returns the last value of {@code prefix}.
      */
-    public Optional<String> getValue(Prefix prefix) {
-        List<String> values = getAllValues(prefix);
+    public Optional<CommandPart> getValue(Prefix prefix) {
+        List<CommandPart> values = getAllValues(prefix);
         return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
     }
 
@@ -48,7 +48,7 @@ public class ArgumentMultimap {
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      */
-    public List<String> getAllValues(Prefix prefix) {
+    public List<CommandPart> getAllValues(Prefix prefix) {
         if (!argMultimap.containsKey(prefix)) {
             return new ArrayList<>();
         }
@@ -58,8 +58,8 @@ public class ArgumentMultimap {
     /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
-    public String getPreamble() {
-        return getValue(new Prefix("")).orElse("");
+    public CommandPart getPreamble() {
+        return getValue(new Prefix("")).get();
     }
 
     /**

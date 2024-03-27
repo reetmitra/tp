@@ -47,4 +47,13 @@ public class CommandString {
         CommandString otherCommandString = (CommandString) other;
         return commandText.equals(otherCommandString.commandText);
     }
+
+    /**
+     * Returns the character at the specified index.
+     * @param index The index of the character to return.
+     * @return The character at the specified index.
+     */
+    public char charAt(int index) {
+        return commandText.charAt(index);
+    }
 }

@@ -113,4 +113,34 @@ public class CommandPart {
         CommandPart otherCommandPart = (CommandPart) other;
         return toString().equals(otherCommandPart.toString());
     }
+
+    /**
+     * Finds the index of the first occurrence of the given substring in this {@link CommandPart}.
+     * @param substring The substring to search for.
+     * @param fromIndex The index to start the search from.
+     * @return The index of the first occurrence of the given substring in this {@link CommandPart}, or -1 if not found.
+     */
+    public int indexOf(String substring, int fromIndex) {
+        return toString().indexOf(substring, fromIndex);
+    }
+
+    /**
+     * Trims the whitespace from the start and end of this {@link CommandPart}.
+     * If the {@link CommandPart} is empty after trimming, the returned part will be at the start of the original part.
+     * @return The trimmed {@link CommandPart}.
+     */
+    public CommandPart trim() {
+        int start = startIndex;
+        int end = endIndex;
+
+        while (end > start && Character.isWhitespace(commandString.charAt(end - 1))) {
+            end--;
+        }
+
+        while (start < end && Character.isWhitespace(commandString.charAt(start))) {
+            start++;
+        }
+
+        return new CommandPart(commandString, start, end);
+    }
 }

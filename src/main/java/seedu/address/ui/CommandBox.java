@@ -48,6 +48,12 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+            if (e instanceof ParseException) {
+                ParseException pe = (ParseException) e;
+                pe.getCommandPart().ifPresent(commandPart -> {
+                    commandTextField.selectRange(commandPart.getStartIndex(), commandPart.getEndIndex());
+                });
+            }
         }
     }
 

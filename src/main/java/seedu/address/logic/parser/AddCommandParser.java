@@ -37,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(CommandPart args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                    args.toString(),
+                    args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,
                     PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_TAG);
 
@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Optional<String> phoneString = argMultimap.getValue(PREFIX_PHONE);
+        Optional<CommandPart> phoneString = argMultimap.getValue(PREFIX_PHONE);
         Optional<Phone> phone;
         if (phoneString.isPresent()) {
             phone = Optional.of(ParserUtil.parsePhone(phoneString.get()));
