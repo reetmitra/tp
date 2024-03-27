@@ -31,10 +31,10 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditCommand parse(CommandPart args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args,
+                ArgumentTokenizer.tokenize(args.toString(),
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                     PREFIX_ROLE, PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_TAG);
 

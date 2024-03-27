@@ -68,6 +68,13 @@ public class CommandPart {
     }
 
     /**
+     * Checks if the part of the command string is empty.
+     */
+    public boolean isEmpty() {
+        return getLength() == 0;
+    }
+
+    /**
      * Returns a substring of this {@link CommandPart}.
      * @param start The start index of the substring (inclusive).
      * @param end The end index of the substring (exclusive).
