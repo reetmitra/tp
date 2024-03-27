@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -17,10 +19,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Keys are unique, but the list of argument values may contain duplicate argument values, i.e. the same argument value
  * can be inserted multiple times for the same prefix.
  */
-public class ArgumentMultimap {
+public class ArgumentMultimap<T> {
 
     /** Prefixes mapped to their respective arguments**/
-    private final Map<Prefix, List<CommandPart>> argMultimap = new HashMap<>();
+    private final Map<Prefix, List<T>> argMultimap = new HashMap<>();
 
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
@@ -29,8 +31,8 @@ public class ArgumentMultimap {
      * @param prefix   Prefix key with which the specified argument value is to be associated
      * @param argValue Argument value to be associated with the specified prefix key
      */
-    public void put(Prefix prefix, CommandPart argValue) {
-        List<CommandPart> argValues = getAllValues(prefix);
+    public void put(Prefix prefix, T argValue) {
+        List<T> argValues = getAllValues(prefix);
         argValues.add(argValue);
         argMultimap.put(prefix, argValues);
     }
@@ -38,8 +40,8 @@ public class ArgumentMultimap {
     /**
      * Returns the last value of {@code prefix}.
      */
-    public Optional<CommandPart> getValue(Prefix prefix) {
-        List<CommandPart> values = getAllValues(prefix);
+    public Optional<T> getValue(Prefix prefix) {
+        List<T> values = getAllValues(prefix);
         return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
     }
 
@@ -48,7 +50,7 @@ public class ArgumentMultimap {
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      */
-    public List<CommandPart> getAllValues(Prefix prefix) {
+    public List<T> getAllValues(Prefix prefix) {
         if (!argMultimap.containsKey(prefix)) {
             return new ArrayList<>();
         }
@@ -58,7 +60,7 @@ public class ArgumentMultimap {
     /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
-    public CommandPart getPreamble() {
+    public T getPreamble() {
         return getValue(new Prefix("")).get();
     }
 
@@ -74,5 +76,18 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Applies the given function to all values.
+     * @param function The function to apply to all values.
+     * @return The new resulting {@code ArgumentMultimap} with the function applied to all values.re
+     */
+    public <R> ArgumentMultimap<R> transformValues(Function<T, R> function) {
+        ArgumentMultimap<R> newMap = new ArgumentMultimap<>();
+        argMultimap.forEach((prefix, values) -> {
+            newMap.argMultimap.put(prefix, values.stream().map(function).collect(Collectors.toList()));
+        });
+        return newMap;
     }
 }

@@ -16,16 +16,26 @@ import java.util.stream.Collectors;
 public class ArgumentTokenizer {
 
     /**
-     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+     * Tokenizes a command part and returns an {@code ArgumentMultimap} object that maps prefixes to their
      * respective argument values. Only the given prefixes will be recognized in the arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(CommandPart argsString, Prefix... prefixes) {
+    public static ArgumentMultimap<CommandPart> tokenize(CommandPart argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+     * respective argument values.
+     * @see ArgumentTokenizer#tokenize(CommandPart, Prefix...)
+     */
+    public static ArgumentMultimap<String> tokenize(String argsString, Prefix... prefixes) {
+        ArgumentMultimap<CommandPart> arguments = tokenize(new CommandPart(new CommandString(argsString)), prefixes);
+        return arguments.transformValues((commandPart) -> commandPart.toString());
     }
 
     /**
@@ -84,7 +94,8 @@ public class ArgumentTokenizer {
      * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
      * @return                ArgumentMultimap object that maps prefixes to their arguments
      */
-    private static ArgumentMultimap extractArguments(CommandPart argsString, List<PrefixPosition> prefixPositions) {
+    private static ArgumentMultimap<CommandPart> extractArguments(CommandPart argsString,
+            List<PrefixPosition> prefixPositions) {
 
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
@@ -98,7 +109,7 @@ public class ArgumentTokenizer {
         prefixPositions.add(endPositionMarker);
 
         // Map prefixes to their argument values (if any)
-        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        ArgumentMultimap<CommandPart> argMultimap = new ArgumentMultimap<>();
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             // Extract and store prefixes and their arguments
             Prefix argPrefix = prefixPositions.get(i).getPrefix();

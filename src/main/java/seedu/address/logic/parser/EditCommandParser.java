@@ -33,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(CommandPart args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
+        ArgumentMultimap<CommandPart> argMultimap =
                 ArgumentTokenizer.tokenize(args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                     PREFIX_ROLE, PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_TAG);
