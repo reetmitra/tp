@@ -73,9 +73,9 @@ public class CommandPartTest {
             List<String> resultToString = Arrays.stream(result).map(CommandPart::toString).collect(Collectors.toList());
             List<String> expectedList = Arrays.asList(expected);
             assertEquals(expectedList, resultToString,
-                    "Splitting '" + testCase[0] + "' by '" + testCase[1] + "' gives " + resultToString + 
-                    " (length " + resultToString.size() + ") instead of " + expectedList +
-                    " (length " + expectedList.size() + ")");
+                    "Splitting '" + testCase[0] + "' by '" + testCase[1] + "' gives " + resultToString
+                    + " (length " + resultToString.size() + ") instead of " + expectedList
+                    + " (length " + expectedList.size() + ")");
             for (CommandPart subpart : result) {
                 assertTrue(subpart.getCommandString() == commandString); // test identity equality
             }

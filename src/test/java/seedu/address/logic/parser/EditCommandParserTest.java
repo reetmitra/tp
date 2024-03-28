@@ -67,7 +67,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -76,13 +76,13 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_INDEX);
     }
 
     @Test

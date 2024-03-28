@@ -60,18 +60,18 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndices_invalidArgs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndices("1, 2, c", ","));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices(buildCommandPart("1, 2, c"), ","));
     }
 
     @Test
     public void parseIndices_duplicateIndex_throwsParseException() {
         String args = "1, 4, 5, 1, 2";
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndices(args, ","));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices(buildCommandPart(args), ","));
     }
 
     @Test
     public void parseIndices_validArgsWhiteSpaceSep_success() throws Exception {
-        List<Index> actualList = ParserUtil.parseIndices("1 5 3", " ");
+        List<Index> actualList = ParserUtil.parseIndices(buildCommandPart("1 5 3"), " ");
         List<Index> expectedList = Arrays.asList(
             Index.fromOneBased(1),
             Index.fromOneBased(5),
@@ -83,7 +83,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndices_validArgsCommaSep_success() throws Exception {
-        List<Index> actualList = ParserUtil.parseIndices("10,3 , 2 ", ",");
+        List<Index> actualList = ParserUtil.parseIndices(buildCommandPart("10,3 , 2 "), ",");
         List<Index> expectedList = Arrays.asList(
             Index.fromOneBased(10),
             Index.fromOneBased(3),
