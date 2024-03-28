@@ -59,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
 
-        Optional<String> addressString = argMultimap.getValue(PREFIX_ADDRESS);
+        Optional<CommandPart> addressString = argMultimap.getValue(PREFIX_ADDRESS);
         Optional<Address> address;
         if (role.equals(Role.PROFESSOR)) {
             if (addressString.isPresent()) {

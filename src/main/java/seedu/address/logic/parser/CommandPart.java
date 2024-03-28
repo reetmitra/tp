@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents a part of the user's full input command string.
  * This class maintains a reference to the full command string and the start/end position of the part in the full
@@ -142,5 +146,36 @@ public class CommandPart {
         }
 
         return new CommandPart(commandString, start, end);
+    }
+
+    /**
+     * Splits this {@link CommandPart} around matches of the given regular expression.
+     * @param regex The regular expression to split around.
+     * @return An array of {@link CommandPart}s computed by splitting this {@link CommandPart} around matches of the
+     *         given regular expression.
+     * @see String#split(String)
+     */
+    public CommandPart[] split(Pattern regex) {
+        Matcher matcher = regex.matcher(toString());
+        int lastEnd = 0;
+        ArrayList<CommandPart> parts = new ArrayList<>();
+        while (matcher.find()) {
+            if (matcher.end() > 0) {
+                parts.add(getSubstring(lastEnd, matcher.start()));
+            }
+            lastEnd = matcher.end();
+        }
+        if (lastEnd < getLength() || lastEnd == 0) {
+            parts.add(getSubstring(lastEnd));
+        }
+        return parts.toArray(new CommandPart[0]);
+    }
+
+    /**
+     * Splits this {@link CommandPart} around matches of the given regular expression.
+     * @see #split(Pattern)
+     */
+    public CommandPart[] split(String regex) {
+        return split(Pattern.compile(regex));
     }
 }
