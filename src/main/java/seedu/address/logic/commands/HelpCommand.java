@@ -20,12 +20,12 @@ public class HelpCommand extends Command {
             + "5. " + DeleteCommand.MESSAGE_USAGE + "\n"
             + "6. " + ClearCommand.MESSAGE_USAGE + "\n"
             + "7. " + ExitCommand.MESSAGE_USAGE + "\n"
-            + "For more detailed information on each command, please refer to the project website.";
+            + "For more detailed information on each command, please press F1 to refer to the project website.";
 
 
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
     }
 }
