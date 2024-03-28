@@ -16,13 +16,10 @@ public class HelpCommand extends Command {
             + "1. " + AddCommand.MESSAGE_USAGE + "\n"
             + "2. " + EditCommand.MESSAGE_USAGE + "\n"
             + "3. " + FindCommand.MESSAGE_USAGE + "\n"
-            + "4. list: Shows a list of all persons in the address book. \n"
-            + "Example: list\n"
+            + "4. " + ListCommand.MESSAGE_USAGE + "\n"
             + "5. " + DeleteCommand.MESSAGE_USAGE + "\n"
-            + "6. clear: Clears all entries from the address book.\n"
-            + "Example: clear\n"
-            + "7. exit: Exits the program.\n"
-            + "Example: exit\n"
+            + "6. " + ClearCommand.MESSAGE_USAGE + "\n"
+            + "7. " + ExitCommand.MESSAGE_USAGE + "\n"
             + "For more detailed information on each command, please refer to the project website.";
 
 
