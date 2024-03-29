@@ -68,11 +68,15 @@ NUSContacts is a **desktop app for managing contacts, optimized for use via a Co
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows available commands and their usage.
 
 Format: `help`
+
+:bulb: **Tip:** Pressing **F1** will open the help window like the image below, guiding you to the project website.
+
+![help ](images/helpMessage.png)
+
+
 
 
 ### Adding a person: `add`
