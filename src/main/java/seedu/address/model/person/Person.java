@@ -91,6 +91,18 @@ public class Person {
     }
 
     /**
+     * Returns false only if Professors do not have an address.
+     */
+    public boolean hasValidAddress() {
+        // checks if a Professor has an address
+        if (this.role == Role.PROFESSOR) {
+            return this.address.isPresent();
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
