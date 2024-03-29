@@ -76,9 +76,6 @@ Format: `help`
 
 ![help ](images/helpMessage.png)
 
-
-
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
