@@ -28,10 +28,10 @@ public class HelpWindowTest {
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) throws Exception {
         Platform.runLater(() -> helpWindow.focus());
-        WaitForAsyncUtils.waitForFxEvents();
+        WaitForAsyncUtils.waitForFxEvents(); // Wait for help window to be focused.
+
         robot.press(KeyCode.ESCAPE);
-        WaitForAsyncUtils.waitForFxEvents();
-        Thread.sleep(2000); // Buffer time for key press to register and close window.
+        WaitForAsyncUtils.waitForFxEvents(); // Wait for any new events in javaFx to be completed.
         assertFalse(helpWindow.isShowing());
     }
 
@@ -43,14 +43,14 @@ public class HelpWindowTest {
         robot.press(KeyCode.BACK_SPACE);
         robot.press(KeyCode.DELETE);
 
-        Thread.sleep(2000); // Buffer time for key press to register.
+        WaitForAsyncUtils.waitForFxEvents(); // Wait for any new events in javaFx to be completed.
         assertTrue(helpWindow.isShowing());
     }
 
     @Test
     public void focusCall() throws Exception {
         Platform.runLater(() -> helpWindow.focus());
-        Thread.sleep(2000);
+        WaitForAsyncUtils.waitForFxEvents(); // Wait for any new events in javaFx to be completed.
         assertTrue(helpWindow.isShowing());
     }
 }
