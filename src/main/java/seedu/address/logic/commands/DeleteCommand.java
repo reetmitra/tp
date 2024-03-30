@@ -20,8 +20,10 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person(s) identified by the index number(s) used in the displayed person list.\n"
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD
+            + ": Deletes the person(s) identified by the index number(s) used in the displayed person list.\n";
+
+    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION
             + "Parameters (for one person): INDEX\n"
             + "Parameters (for multiple people): INDEX1, INDEX2, ...\n"
             + "Example: " + COMMAND_WORD + " 1, 2, 3";
