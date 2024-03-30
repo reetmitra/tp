@@ -25,6 +25,7 @@ check.dependsOn javadoc
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    systemProperties = ['testfx.robot': 'glass']
 }
 
 task coverage(type: JacocoReport) {
