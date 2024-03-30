@@ -22,7 +22,8 @@ public class HelpWindowTest {
     @Start
     public void start(Stage stage) {
         helpWindow = new HelpWindow(stage);
-        helpWindow.show();
+        Platform.runLater(() -> helpWindow.show());
+        WaitForAsyncUtils.waitForFxEvents();
     }
 
     @Test
