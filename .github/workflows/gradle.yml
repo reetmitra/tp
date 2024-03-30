@@ -37,7 +37,7 @@ jobs:
 
       - name: Build and check with Gradle (Ubuntu)
         if: runner.os == 'Linux'
-        run: ./gradlew check coverage
+        run: xvfb-run ./gradlew check coverage
 
       - name: Build and check with Gradle (macOS)
         if: runner.os == 'macOS'

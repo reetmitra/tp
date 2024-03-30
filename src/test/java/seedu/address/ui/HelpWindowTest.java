@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.util.WaitForAsyncUtils;
 
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
@@ -27,7 +28,7 @@ public class HelpWindowTest {
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) throws Exception {
         robot.press(KeyCode.ESCAPE);
-
+        WaitForAsyncUtils.waitForFxEvents();
         Thread.sleep(2000); // Buffer time for key press to register and close window.
         assertFalse(helpWindow.isShowing());
     }
