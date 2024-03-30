@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -26,22 +24,33 @@ public class HelpWindowTest {
         helpWindow.show();
     }
 
-    @DisabledOnOs(OS.LINUX)
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) {
-        assertTrue(helpWindow.isShowing());
-        robot.press(KeyCode.ESCAPE);
-        assertFalse(helpWindow.isShowing());
+        try {
+            assertTrue(helpWindow.isShowing());
+            robot.press(KeyCode.ESCAPE);
+
+            Thread.sleep(2000); // Buffer time for key press to register and close window.
+            assertFalse(helpWindow.isShowing());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void remainOpenOnNonEscapeKeyPress(FxRobot robot) {
-        robot.press(KeyCode.A);
-        robot.press(KeyCode.SOFTKEY_0);
-        robot.press(KeyCode.L);
-        robot.press(KeyCode.BACK_SPACE);
-        robot.press(KeyCode.DELETE);
-        assertTrue(helpWindow.isShowing());
+        try {
+            robot.press(KeyCode.A);
+            robot.press(KeyCode.SOFTKEY_0);
+            robot.press(KeyCode.L);
+            robot.press(KeyCode.BACK_SPACE);
+            robot.press(KeyCode.DELETE);
+
+            Thread.sleep(2000); // Buffer time for key press to register.
+            assertTrue(helpWindow.isShowing());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

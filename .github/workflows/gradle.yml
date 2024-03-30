@@ -36,15 +36,15 @@ jobs:
           java-package: jdk+fx
 
       - name: Build and check with Gradle (Ubuntu)
-        if: matrix.platform == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-latest'
         run: xvfb-run ./gradlew check coverage
 
       - name: Build and check with Gradle (macOS)
-        if: matrix.platform == 'macos-latest'
+        if: matrix.os == 'macos-latest'
         run: ./gradlew check coverage
 
       - name: Build and check with Gradle (Windows)
-        if: matrix.platform == 'windows-latest'
+        if: matrix.os == 'windows-latest'
         run: ./gradlew check coverage
 
       - name: Upload coverage reports to Codecov
