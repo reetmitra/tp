@@ -33,8 +33,8 @@ public class CourseContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        CourseContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (CourseContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        CourseContainsKeywordsPredicate otherCourseContainsKeywordsPredicate = (CourseContainsKeywordsPredicate) other;
+        return keywords.equals(otherCourseContainsKeywordsPredicate.keywords);
     }
 
     @Override
