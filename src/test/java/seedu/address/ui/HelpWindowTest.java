@@ -22,13 +22,13 @@ public class HelpWindowTest {
     @Start
     public void start(Stage stage) {
         helpWindow = new HelpWindow(stage);
-        Platform.runLater(() -> helpWindow.show());
-        WaitForAsyncUtils.waitForFxEvents();
+        helpWindow.show();
     }
 
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) throws Exception {
-        helpWindow.focus();
+        Platform.runLater(() -> helpWindow.focus());
+        WaitForAsyncUtils.waitForFxEvents();
         robot.press(KeyCode.ESCAPE);
         WaitForAsyncUtils.waitForFxEvents();
         Thread.sleep(2000); // Buffer time for key press to register and close window.
