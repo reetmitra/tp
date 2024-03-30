@@ -1,12 +1,12 @@
 package seedu.address.model.person;
 
-import seedu.address.testutil.PersonBuilder;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,13 +20,15 @@ public class CourseContainsKeywordsPredicateTest {
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
         CourseContainsKeywordsPredicate firstPredicate = new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
-        CourseContainsKeywordsPredicate secondPredicate = new CourseContainsKeywordsPredicate(secondPredicateKeywordList);
+        CourseContainsKeywordsPredicate secondPredicate =
+                new CourseContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CourseContainsKeywordsPredicate firstPredicateCopy = new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
+        CourseContainsKeywordsPredicate firstPredicateCopy =
+                new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
