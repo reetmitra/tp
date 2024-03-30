@@ -25,6 +25,12 @@ public class FindCommand extends Command {
     private final NameContainsKeywordsPredicate nPredicate;
     private final CourseContainsKeywordsPredicate cPredicate;
 
+    /**
+     * Constructs a FindCommand with the specified predicates.
+     *
+     * @param nPredicate Predicate for filtering people based on keywords contained in their names.
+     * @param cPredicate Predicate for filtering people based on keywords contained in their courses.
+     */
     public FindCommand(NameContainsKeywordsPredicate nPredicate, CourseContainsKeywordsPredicate cPredicate) {
         this.nPredicate = nPredicate;
         this.cPredicate = cPredicate;
