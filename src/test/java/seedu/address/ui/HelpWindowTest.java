@@ -9,6 +9,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -25,17 +26,29 @@ public class HelpWindowTest {
 
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) {
-        robot.press(KeyCode.ESCAPE);
-        assertFalse(helpWindow.isShowing());
+        Platform.runLater(() -> helpWindow.show());
+        try {
+            Thread.sleep(2000);
+            robot.press(KeyCode.ESCAPE);
+            assertFalse(helpWindow.isShowing());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void remainOpenOnNonEscapeKeyPress(FxRobot robot) {
-        robot.press(KeyCode.A);
-        robot.press(KeyCode.SOFTKEY_0);
-        robot.press(KeyCode.L);
-        robot.press(KeyCode.BACK_SPACE);
-        robot.press(KeyCode.DELETE);
-        assertTrue(helpWindow.isShowing());
+        Platform.runLater(() -> helpWindow.show());
+        try {
+            Thread.sleep(2000);
+            robot.press(KeyCode.A);
+            robot.press(KeyCode.SOFTKEY_0);
+            robot.press(KeyCode.L);
+            robot.press(KeyCode.BACK_SPACE);
+            robot.press(KeyCode.DELETE);
+            assertTrue(helpWindow.isShowing());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
