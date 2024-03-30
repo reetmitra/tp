@@ -13,13 +13,13 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Here are the available commands and their usage:\n"
-            + "1. " + AddCommand.MESSAGE_USAGE + "\n"
-            + "2. " + EditCommand.MESSAGE_USAGE + "\n"
-            + "3. " + FindCommand.MESSAGE_USAGE + "\n"
-            + "4. " + ListCommand.MESSAGE_USAGE + "\n"
-            + "5. " + DeleteCommand.MESSAGE_USAGE + "\n"
-            + "6. " + ClearCommand.MESSAGE_USAGE + "\n"
-            + "7. " + ExitCommand.MESSAGE_USAGE + "\n"
+            + "1. " + AddCommand.COMMAND_DESCRIPTION
+            + "2. " + EditCommand.COMMAND_DESCRIPTION
+            + "3. " + FindCommand.COMMAND_DESCRIPTION
+            + "4. " + ListCommand.COMMAND_DESCRIPTION
+            + "5. " + DeleteCommand.COMMAND_DESCRIPTION
+            + "6. " + ClearCommand.COMMAND_DESCRIPTION
+            + "7. " + ExitCommand.COMMAND_DESCRIPTION
             + "For more detailed information on each command, please press F1 to refer to the project website.";
 
 
