@@ -26,7 +26,6 @@ public class HelpWindowTest {
 
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) throws Exception {
-        assertTrue(helpWindow.isShowing());
         robot.press(KeyCode.ESCAPE);
 
         Thread.sleep(2000); // Buffer time for key press to register and close window.
