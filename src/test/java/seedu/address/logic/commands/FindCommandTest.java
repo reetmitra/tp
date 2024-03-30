@@ -91,9 +91,19 @@ public class FindCommandTest {
         CourseContainsKeywordsPredicate cPredicate = prepareCoursePredicate("IS2218 CS2030S");
         FindCommand command = new FindCommand(nPredicate, cPredicate);
         expectedModel.updateFilteredPersonList(cPredicate);
-        System.out.println(expectedModel.getAddressBook().toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate nPredicate = prepareNamePredicate("Elle");
+        CourseContainsKeywordsPredicate cPredicate = prepareCoursePredicate("IS2218");
+        FindCommand command = new FindCommand(nPredicate, cPredicate);
+        expectedModel.updateFilteredPersonList(nPredicate.or(cPredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, ELLE), model.getFilteredPersonList());
     }
 
     @Test
