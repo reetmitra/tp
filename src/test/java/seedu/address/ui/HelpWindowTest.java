@@ -11,6 +11,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -41,5 +42,17 @@ public class HelpWindowTest {
         robot.press(KeyCode.BACK_SPACE);
         robot.press(KeyCode.DELETE);
         assertTrue(helpWindow.isShowing());
+    }
+
+    @Test
+    public void focusCall() {
+        Platform.runLater(() -> helpWindow.focus());
+
+        try {
+            Thread.sleep(2000);
+            assertTrue(helpWindow.isShowing());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
