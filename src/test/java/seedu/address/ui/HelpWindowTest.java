@@ -25,43 +25,30 @@ public class HelpWindowTest {
     }
 
     @Test
-    public void closeOnEscapeKeyPress(FxRobot robot) {
-        try {
-            assertTrue(helpWindow.isShowing());
-            robot.press(KeyCode.ESCAPE);
+    public void closeOnEscapeKeyPress(FxRobot robot) throws Exception {
+        assertTrue(helpWindow.isShowing());
+        robot.press(KeyCode.ESCAPE);
 
-            Thread.sleep(2000); // Buffer time for key press to register and close window.
-            assertFalse(helpWindow.isShowing());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000); // Buffer time for key press to register and close window.
+        assertFalse(helpWindow.isShowing());
     }
 
     @Test
-    public void remainOpenOnNonEscapeKeyPress(FxRobot robot) {
-        try {
-            robot.press(KeyCode.A);
-            robot.press(KeyCode.SOFTKEY_0);
-            robot.press(KeyCode.L);
-            robot.press(KeyCode.BACK_SPACE);
-            robot.press(KeyCode.DELETE);
+    public void remainOpenOnNonEscapeKeyPress(FxRobot robot) throws Exception {
+        robot.press(KeyCode.A);
+        robot.press(KeyCode.SOFTKEY_0);
+        robot.press(KeyCode.L);
+        robot.press(KeyCode.BACK_SPACE);
+        robot.press(KeyCode.DELETE);
 
-            Thread.sleep(2000); // Buffer time for key press to register.
-            assertTrue(helpWindow.isShowing());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000); // Buffer time for key press to register.
+        assertTrue(helpWindow.isShowing());
     }
 
     @Test
-    public void focusCall() {
+    public void focusCall() throws Exception {
         Platform.runLater(() -> helpWindow.focus());
-
-        try {
-            Thread.sleep(2000);
-            assertTrue(helpWindow.isShowing());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000);
+        assertTrue(helpWindow.isShowing());
     }
 }
