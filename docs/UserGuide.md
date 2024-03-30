@@ -68,12 +68,17 @@ NUSContacts is a **desktop app for managing contacts, optimized for use via a Co
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message listing out all the available commands and their purpose.
 
 Format: `help`
 
+For more information regarding the comamnd formats and examples, press `F1` to open up a help window (as shown in the picture below).
+To close the help window, you can simply press `esc` on your keyboard (other methods such as `alt`+`F4` and clicking on 
+the red `X` button on the top right corner of the window also works).
+
+![help message](images/helpMessage.png)
+
+The project website includes the NUSContacts user guide, which contains a more detailed description of each command.
 
 ### Adding a person: `add`
 
