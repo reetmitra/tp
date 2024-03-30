@@ -26,10 +26,13 @@ public class HelpWindowTest {
 
     @Test
     public void closeOnEscapeKeyPress(FxRobot robot) {
-        Platform.runLater(() -> helpWindow.show());
+        Platform.runLater(() -> {
+            helpWindow.show();
+            robot.press(KeyCode.ESCAPE);
+        });
+
         try {
             Thread.sleep(2000);
-            robot.press(KeyCode.ESCAPE);
             assertFalse(helpWindow.isShowing());
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -38,14 +41,17 @@ public class HelpWindowTest {
 
     @Test
     public void remainOpenOnNonEscapeKeyPress(FxRobot robot) {
-        Platform.runLater(() -> helpWindow.show());
-        try {
-            Thread.sleep(2000);
+        Platform.runLater(() -> {
+            helpWindow.show();
             robot.press(KeyCode.A);
             robot.press(KeyCode.SOFTKEY_0);
             robot.press(KeyCode.L);
             robot.press(KeyCode.BACK_SPACE);
             robot.press(KeyCode.DELETE);
+        });
+
+        try {
+            Thread.sleep(2000);
             assertTrue(helpWindow.isShowing());
         } catch (InterruptedException e) {
             e.printStackTrace();
