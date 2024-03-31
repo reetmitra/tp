@@ -44,6 +44,7 @@ public class FindCommandTest {
 
         FindCommand findFirstCommand = new FindCommand(firstNamePredicate, firstCoursePredicate);
         FindCommand findSecondCommand = new FindCommand(secondNamePredicate, secondCoursePredicate);
+        FindCommand findFirstNameSecondCourseCommand = new FindCommand(firstNamePredicate, secondCoursePredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -60,6 +61,12 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        // same name but different course -> returns false
+        assertFalse(findFirstCommand.equals(findFirstNameSecondCourseCommand));
+
+        // same course but different name -> returns false
+        assertFalse(findSecondCommand.equals(findFirstNameSecondCourseCommand));
     }
 
     @Test
