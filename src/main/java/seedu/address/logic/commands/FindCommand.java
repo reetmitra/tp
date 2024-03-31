@@ -22,24 +22,24 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob cs2103t";
 
-    private final NameContainsKeywordsPredicate nPredicate;
-    private final CourseContainsKeywordsPredicate cPredicate;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final CourseContainsKeywordsPredicate coursePredicate;
 
     /**
      * Constructs a FindCommand with the specified predicates.
      *
-     * @param nPredicate Predicate for filtering people based on keywords contained in their names.
-     * @param cPredicate Predicate for filtering people based on keywords contained in their courses.
+     * @param namePredicate Predicate for filtering people based on keywords contained in their names.
+     * @param coursePredicate Predicate for filtering people based on keywords contained in their courses.
      */
-    public FindCommand(NameContainsKeywordsPredicate nPredicate, CourseContainsKeywordsPredicate cPredicate) {
-        this.nPredicate = nPredicate;
-        this.cPredicate = cPredicate;
+    public FindCommand(NameContainsKeywordsPredicate namePredicate, CourseContainsKeywordsPredicate coursePredicate) {
+        this.namePredicate = namePredicate;
+        this.coursePredicate = coursePredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(nPredicate.or(cPredicate));
+        model.updateFilteredPersonList(namePredicate.or(coursePredicate));
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -56,14 +56,15 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return nPredicate.equals(otherFindCommand.nPredicate) && cPredicate.equals(otherFindCommand.cPredicate);
+        return namePredicate.equals(otherFindCommand.namePredicate)
+                && coursePredicate.equals(otherFindCommand.coursePredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name predicate", nPredicate)
-                .add("course predicate", cPredicate)
+                .add("namePredicate", namePredicate)
+                .add("coursePredicate", coursePredicate)
                 .toString();
     }
 }
