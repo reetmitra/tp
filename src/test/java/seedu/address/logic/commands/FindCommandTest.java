@@ -111,8 +111,8 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate nPredicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         CourseContainsKeywordsPredicate cPredicate = new CourseContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(nPredicate, cPredicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + nPredicate
-                                                               + ", predicate=" + cPredicate + "}";
+        String expected = FindCommand.class.getCanonicalName() + "{name predicate=" + nPredicate
+                                                               + ", course predicate=" + cPredicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
