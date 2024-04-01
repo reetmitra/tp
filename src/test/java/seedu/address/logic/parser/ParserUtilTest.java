@@ -20,6 +20,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -231,6 +232,30 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
+    }
+
+    @Test
+    public void parseRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(buildCommandPart(""))); // empty string
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(buildCommandPart(" "))); // spaces only
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(buildCommandPart("STUDENT123")));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(buildCommandPart("STUDENT-")));
+    }
+
+    @Test
+    public void parseRole_validValue_returnsRole() throws Exception {
+        assertEquals(ParserUtil.parseRole(buildCommandPart("STUDENT ")), Role.STUDENT);
+        assertEquals(ParserUtil.parseRole(buildCommandPart(" STUDENT")), Role.STUDENT);
+        assertEquals(ParserUtil.parseRole(buildCommandPart("student")), Role.STUDENT);
+        assertEquals(ParserUtil.parseRole(buildCommandPart("student")), Role.STUDENT);
+        assertEquals(ParserUtil.parseRole(buildCommandPart(" s ")), Role.STUDENT);
+        assertEquals(ParserUtil.parseRole(buildCommandPart("t")), Role.TA);
+        assertEquals(ParserUtil.parseRole(buildCommandPart("pro")), Role.PROFESSOR);
     }
 
     @Test
