@@ -36,12 +36,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+    public static Index parseIndex(CommandPart oneBasedIndex) throws ParseException {
+        CommandPart trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex.toString())) {
+            throw new ParseException(MESSAGE_INVALID_INDEX, trimmedIndex);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex.toString()));
     }
 
     /**
@@ -50,8 +50,8 @@ public class ParserUtil {
      *
      * @throws ParseException If any of the specified index is invalid, or there are duplicate input indices.
      */
-    public static List<Index> parseIndices(String args, String sep) throws ParseException {
-        final String[] splitArgs = args.split(sep);
+    public static List<Index> parseIndices(CommandPart args, String sep) throws ParseException {
+        final CommandPart[] splitArgs = args.split(sep);
         final ArrayList<Index> indices = new ArrayList<>();
 
         for (int i = 0; i < splitArgs.length; i++) {
@@ -68,146 +68,148 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code CommandPart name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static Name parseName(CommandPart name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        CommandPart trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName.toString())) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS, trimmedName);
         }
-        return new Name(trimmedName);
+        return new Name(trimmedName.toString());
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code CommandPart phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Phone parsePhone(CommandPart phone) throws ParseException {
         requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        CommandPart trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone.toString())) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS, trimmedPhone);
         }
-        return new Phone(trimmedPhone);
+        return new Phone(trimmedPhone.toString());
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Optional<Phone>}, allowing empty input.
+     * Parses a {@code CommandPart phone} into a {@code Optional<Phone>}, allowing empty input.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Optional<Phone> parseOptionalPhone(String phone) throws ParseException {
+    public static Optional<Phone> parseOptionalPhone(CommandPart phone) throws ParseException {
         requireNonNull(phone);
         if (phone.trim().isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of(parsePhone(phone));
+        return Optional.of(parsePhone(phone.trim()));
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code CommandPart address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static Address parseAddress(CommandPart address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        CommandPart trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress.toString())) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS, trimmedAddress);
         }
-        return new Address(trimmedAddress);
+        return new Address(trimmedAddress.toString());
     }
 
     /**
-     * Parses a {@code String address} into a {@code Optional<Address>}, allowing empty input.
+     * Parses a {@code CommandPart address} into a {@code Optional<Address>}, allowing empty input.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Optional<Address> parseOptionalAddress(String address) throws ParseException {
+    public static Optional<Address> parseOptionalAddress(CommandPart address) throws ParseException {
         requireNonNull(address);
         if (address.trim().isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(parseAddress(address));
     }
+
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code CommandPart email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
+    public static Email parseEmail(CommandPart email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        CommandPart trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail.toString())) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS, trimmedEmail);
         }
-        return new Email(trimmedEmail);
+        return new Email(trimmedEmail.toString());
     }
 
     /**
-     * Parses a {@code String course} into an {@code Course}.
+     * Parses a {@code CommandPart course} into an {@code Course}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Course parseCourse(String course) throws ParseException {
+    public static Course parseCourse(CommandPart course) throws ParseException {
         requireNonNull(course);
-        String trimmedCourse = course.trim();
-        if (!Course.isValidCourse(trimmedCourse)) {
-            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        CommandPart trimmedCourse = course.trim();
+        if (!Course.isValidCourse(trimmedCourse.toString())) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS, trimmedCourse);
         }
-        return new Course(trimmedCourse);
+        return new Course(trimmedCourse.toString());
     }
 
     /**
-     * Parses a {@code String role} from user input into a {@code Role}.
+     * Parses a {@code CommandPart role} from user input into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      * Allows specifying a role case-insensitively, and matching by an unambiguous prefix.
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Role parseRole(String role) throws ParseException {
+    public static Role parseRole(CommandPart role) throws ParseException {
         requireNonNull(role);
-        List<String> matchedRoles = ParserUtil.filterByPrefix(role.trim().toUpperCase(), Role.getAllRoles());
+        CommandPart trimmedRole = role.trim();
+        List<String> matchedRoles = ParserUtil.filterByPrefix(trimmedRole.toString().toUpperCase(), Role.getAllRoles());
         if (matchedRoles.size() == 1) {
             return Role.valueOf(matchedRoles.get(0));
         } else {
-            throw new ParseException(MESSAGE_ROLE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_ROLE_CONSTRAINTS, trimmedRole);
         }
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code CommandPart tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(CommandPart tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        CommandPart trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag.toString())) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS, trimmedTag);
         }
-        return new Tag(trimmedTag);
+        return new Tag(trimmedTag.toString());
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<CommandPart> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Collection<CommandPart> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+        for (CommandPart tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
