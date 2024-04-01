@@ -2,47 +2,48 @@ package seedu.address.logic.parser.exceptions;
 
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.CommandException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.CommandPart;
 
 /**
  * Represents a parse error encountered by a parser.
  */
-public class ParseException extends IllegalValueException {
+public class ParseException extends IllegalValueException implements CommandException {
     /**
      * The part of the command that causes the error.
      */
-    private final Optional<CommandPart> commandPart;
+    private final Optional<CommandPart> erroneousPart;
 
-    private ParseException(String message, Optional<CommandPart> commandPart) {
+    private ParseException(String message, Optional<CommandPart> erroneousPart) {
         super(message);
-        assert commandPart != null;
-        this.commandPart = commandPart;
+        assert erroneousPart != null;
+        this.erroneousPart = erroneousPart;
     }
 
-    private ParseException(String message, Throwable cause, Optional<CommandPart> commandPart) {
+    private ParseException(String message, Throwable cause, Optional<CommandPart> erroneousPart) {
         super(message, cause);
-        assert commandPart != null;
-        this.commandPart = commandPart;
+        assert erroneousPart != null;
+        this.erroneousPart = erroneousPart;
     }
 
     /**
-     * Constructs a ParseException with the specified detail message and command part.
+     * Constructs a {@code ParseException} with the specified detail message and command part.
      * @param message The detail message.
-     * @param commandPart The part of the command that causes the error.
+     * @param erroneousPart The part of the command that causes the error.
      */
-    public ParseException(String message, CommandPart commandPart) {
-        this(message, Optional.of(commandPart));
+    public ParseException(String message, CommandPart erroneousPart) {
+        this(message, Optional.of(erroneousPart));
     }
 
     /**
-     * Constructs a ParseException with the specified detail message, command part, and cause.
+     * Constructs a {@code ParseException} with the specified detail message, command part, and cause.
      * @param message The detail message.
      * @param cause The cause of the error.
-     * @param commandPart The part of the command that causes the error.
+     * @param erroneousPart The part of the command that causes the error.
      */
-    public ParseException(String message, Throwable cause, CommandPart commandPart) {
-        this(message, cause, Optional.of(commandPart));
+    public ParseException(String message, Throwable cause, CommandPart erroneousPart) {
+        this(message, cause, Optional.of(erroneousPart));
     }
 
     /**
@@ -61,11 +62,8 @@ public class ParseException extends IllegalValueException {
         this(message, cause, Optional.empty());
     }
 
-    /**
-     * Gets the part of the command that causes the error.
-     * @return The part of the command that causes the error.
-     */
-    public Optional<CommandPart> getCommandPart() {
-        return commandPart;
+    @Override
+    public Optional<CommandPart> getErroneousPart() {
+        return erroneousPart;
     }
 }
