@@ -7,7 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -16,7 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String WEBSITE_URL = "https://ay2324s2-cs2103t-t11-2.github.io/tp/";
-    public static final String HELP_MESSAGE = "NUSContacts Application\n"
+    public static final String HELP_MESSAGE = MainApp.APP_NAME + " Application\n"
         + "Visit the project website: " + WEBSITE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -36,6 +39,15 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+
+        // Pressing ESC key while this window is in focus will close it.
+        root.addEventHandler(
+            KeyEvent.KEY_PRESSED,
+            event -> {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    getRoot().close();
+                }
+            });
     }
 
     /**
@@ -87,6 +99,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
+        getRoot().setIconified(false);
         getRoot().requestFocus();
     }
 
