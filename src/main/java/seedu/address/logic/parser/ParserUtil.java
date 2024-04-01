@@ -27,6 +27,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_DUPLICATE_INDEX = "There is a duplicate Index listed.";
+    public static final String MESSAGE_ROLE_CONSTRAINTS =
+            "Roles should be either 'STUDENT', 'TA', or 'PROFESSOR', or an unambiguous prefix of it.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -168,18 +170,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String role} into a {@code Role}.
+     * Parses a {@code String role} from user input into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
+     * Allows specifying a role case-insensitively, and matching by an unambiguous prefix.
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
-        String trimmedRole = role.trim();
-        if (!Role.isValidRole(trimmedRole)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        List<String> matchedRoles = ParserUtil.filterByPrefix(role.trim().toUpperCase(), Role.getAllRoles());
+        if (matchedRoles.size() == 1) {
+            return Role.valueOf(matchedRoles.get(0));
+        } else {
+            throw new ParseException(MESSAGE_ROLE_CONSTRAINTS);
         }
-        return Role.valueOf(trimmedRole);
     }
 
     /**
