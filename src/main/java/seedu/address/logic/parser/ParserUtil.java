@@ -134,7 +134,8 @@ public class ParserUtil {
      */
     public static Optional<Address> parseOptionalAddress(CommandPart address) throws ParseException {
         requireNonNull(address);
-        if (address.trim().isEmpty()) {
+        CommandPart trimmedAddress = address.trim();
+        if (trimmedAddress.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(parseAddress(address));
