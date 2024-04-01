@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,13 +11,10 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * Contains helper methods for testing {@link CommandPart}.
- */
 public class CommandPartTest {
 
     @Test
-    public void commandPartSubstring_validInput_returnsSubstring() {
+    public void substring_validInput_returnsSubstring() {
         CommandString commandString = new CommandString("delete 0,1");
         CommandPart wholeCommand = new CommandPart(commandString);
         assertEquals(wholeCommand.toString(), "delete 0,1");
@@ -28,21 +26,38 @@ public class CommandPartTest {
     }
 
     @Test
-    public void commandPartEquals_sameString_returnsTrue() {
+    public void equals_sameString_returnsTrue() {
         CommandString commandString = new CommandString("delete 0,0");
         CommandPart wholeCommand = new CommandPart(commandString);
+        assertEquals(wholeCommand, wholeCommand);
         assertEquals(wholeCommand.getSubstring(0, 10), wholeCommand);
-        CommandPart firstArgument = wholeCommand.getSubstring(7, 8);
+
+        CommandPart firstArgument = wholeCommand.getSubstring(7, 8); // the first "0"
         assertEquals(firstArgument.getSubstring(0, 1), firstArgument);
         assertEquals(firstArgument.getSubstring(0), firstArgument);
-        CommandPart secondArgument = wholeCommand.getSubstring(9, 10);
+
+        CommandPart secondArgument = wholeCommand.getSubstring(9, 10); // the second "0"
         assertEquals(firstArgument, secondArgument);
         assertEquals(firstArgument.getStartIndex(), 7);
+        assertEquals(firstArgument.getEndIndex(), 8);
         assertEquals(secondArgument.getStartIndex(), 9);
     }
 
     @Test
-    public void commandPartSubstring_invalidInput_throwsError() {
+    public void equals_null_returnsFalse() {
+        CommandString commandString = new CommandString("delete 0,0");
+        CommandPart wholeCommand = new CommandPart(commandString);
+        assertNotEquals(wholeCommand, null);
+    }
+
+    @Test
+    public void hashcode() {
+        assertEquals(new CommandPart(new CommandString("delete 0,0")).hashCode(),
+                new CommandPart(new CommandString("delete 0,0")).hashCode());
+    }
+
+    @Test
+    public void substring_invalidInput_throwsError() {
         CommandString commandString = new CommandString("delete 0,1");
         CommandPart wholeCommand = new CommandPart(commandString);
         assertThrows(Error.class, () -> wholeCommand.getSubstring(11, 20));
@@ -53,7 +68,7 @@ public class CommandPartTest {
     }
 
     @Test
-    public void commandPartSplit_validInput_returnsResult() {
+    public void split_validInput_returnsResult() {
         // iterate over test cases ["a:b:c", ":", ["a", "b", "c"]], etc.
         // for each test case, create a CommandPart object and call split
         // compare the result with String.split result
