@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.logic.parser.CommandString;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -173,7 +173,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(CommandString)
      */
-    private CommandResult executeCommand(CommandString commandString) throws CommandException, ParseException {
+    private CommandResult executeCommand(CommandString commandString) throws CommandExecutionException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandString);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -188,7 +188,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandExecutionException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandString);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

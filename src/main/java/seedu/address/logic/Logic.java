@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.logic.parser.CommandString;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -19,10 +19,10 @@ public interface Logic {
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
-     * @throws CommandException If an error occurs during command execution.
+     * @throws CommandExecutionException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(CommandString commandText) throws CommandException, ParseException;
+    CommandResult execute(CommandString commandText) throws CommandExecutionException, ParseException;
 
     /**
      * Returns the AddressBook.
