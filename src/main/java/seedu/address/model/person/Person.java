@@ -118,18 +118,6 @@ public class Person {
     }
 
     /**
-     * Returns false only if Professors do not have an address.
-     */
-    public boolean hasValidAddress() {
-        // checks if a Professor has an address
-        if (this.role == Role.PROFESSOR) {
-            return this.address.isPresent();
-        } else {
-            return true;
-        }
-    }
-
-    /**
      * Validates the address based on the person's role.
      * @param role
      * @param address

@@ -89,8 +89,6 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandExecutionException(MESSAGE_DUPLICATE_PERSON);
-        } else if (!editedPerson.hasValidAddress()) {
-            throw new CommandExecutionException("Test error 1");
         }
 
         model.setPerson(personToEdit, editedPerson);
