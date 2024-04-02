@@ -51,8 +51,8 @@ Person *--> Role
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
+Name -[hidden]right-> Phone
 Address -[hidden]right-> Email
 Email -[hidden]right-> Role
 Role -[hidden]right-> Course
