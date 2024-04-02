@@ -155,6 +155,77 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Highlight error feature
+
+This feature would automatically highlight (select) the part of the command that contains the error in the command box,
+so that the user can edit it more quickly.
+
+For example, if the user type `edit 1 p/12 c/CS2103T`, since the phone number is invalid (but the course code `CS2103T` is valid), then `12` will be highlighted, which speeds up the process of data entry because the user no longer have to press `[←]` several times to navigate to `12`.
+
+#### Implementation
+
+First, many functions that originally takes the command string, will now take `CommandString`, which is a class
+containing a string.
+
+Compare the old and the new sequence diagram below for the execution of a command. This is the old sequence diagram.
+
+![OldArchitectureSequenceDiagram](images/OldArchitectureSequenceDiagram.png)
+
+And this is the new sequence diagram.
+
+![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
+
+A class `CommandPart` is used to maintain a part of a command. For example, if `s` is a `CommandString` with value `edit 1 p/12 c/CS2103T`, then `new CommandPart(s).substring(9, 11)` returns a `CommandPart` whose `toString()` representation is `12`, but it also remembers the index into the original `CommandString` object.
+
+![CommandPartClassDiagram](images/CommandPartClassDiagram.png)
+
+Then, `ParseException` and `CommandExecutionException` are two exception classes that implements the `CommandException`
+interface. A `CommandException` has an `getErroneousPart()` method that returns an `Optional<CommandPart>`.
+
+![CommandExceptionClassDiagram](images/CommandExceptionClassDiagram.png)
+
+When the UI catches a `ParseException` or `CommandExecutionException`, it will call `getErroneousPart()` on the
+exception object. If the result is not `Optional.empty()`, it will select the corresponding part in the command box.
+
+Various methods in the parser and the command executor is modified to include the correct command part.
+
+For backwards compatibility, not all `CommandException` object need to know what part of the command causes the error.
+
+#### Design considerations
+
+**Aspect: How to represent a command string:**
+
+* **Alternative 1 (current choice):** Name the class `CommandString`.
+
+**Aspect: How to represent a part of the command string:**
+
+* **Alternative 1 (current choice):** Name the class `CommandPart`, and make it specifically only represent a part of a
+  command.
+  * Pros: Descriptive class name.
+  * Cons: See the pros of alternative 2.
+* **Alternative 2:** Name the class `StringPart` or equivalent, and make it represent a part of *any* string.
+  * Pros: Later if the need to maintain a substring with reference to the original string shows up in another part of
+    the code, the class can be reused.
+  * Cons: See the pros of alternative 1.
+
+**Aspect: How to implement common `getErroneousPart()` method for the exception classes:**
+
+* **Alternative 1 (current choice):** Make an interface `CommandException`, which exposes `getErroneousPart()`.
+  * Pros: Caller can call `getErroneousPart()` without checking and casting it to `CommandExecutionException` to
+    `ParseException`.
+  * Cons: Ambiguous semantic. There's no guarantee a class implementing `CommandException` also extends `Exception`.
+
+* **Alternative 2:** Make an abstract class `CommandException`, and make both classes inherit from that.
+  * Pros: Allows a common implementation for `getErroneousPart()` without duplicating the code across classes.
+  * Pros: Allows code to write `catch (CommandException e)` instead of `catch (ParseException | CommandExecutionException
+    e)`.
+  * Cons: `ParseException` already inherit from `IllegalValueException`, and Java does not allow diamond inheritance.
+
+* **Alternative 3:** Same as alternative 2, but make `ParseException` no longer inherit from `IllegalValueException`.
+  * Pros: Same as in alternative 2.
+  * Cons: Breaks backwards compatibility, because some part of the code may expect `catch (IllegalValueException)` to
+    also catch a `ParseException`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

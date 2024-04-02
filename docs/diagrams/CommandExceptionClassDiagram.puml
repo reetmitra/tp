@@ -1,0 +1,23 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class CommandExecutionException
+class "<<interface>>\nCommandException" as CommandException {
+    +getErroneousPart(): Optional<CommandPart>
+}
+class ParseException
+class "{abstract}\nCommand" as Command
+class "<<interface>>\nParser" as Parser
+
+
+Command .right.> CommandExecutionException : throws >
+Parser .right.> ParseException : throws >
+ParseException .down[hidden].|> Command
+ParseException -right|> IllegalValueException
+IllegalValueException -right|> Exception
+CommandExecutionException .right.|> CommandException
+ParseException ..|> CommandException
+
+@enduml
