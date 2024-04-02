@@ -34,8 +34,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
+    public AddCommand parse(CommandPart args) throws ParseException {
+        ArgumentMultimap<CommandPart> argMultimap =
                 ArgumentTokenizer.tokenize(
                     args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,
@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Optional<String> phoneString = argMultimap.getValue(PREFIX_PHONE);
+        Optional<CommandPart> phoneString = argMultimap.getValue(PREFIX_PHONE);
         Optional<Phone> phone;
         if (phoneString.isPresent()) {
             phone = Optional.of(ParserUtil.parsePhone(phoneString.get()));
@@ -59,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
 
-        Optional<String> addressString = argMultimap.getValue(PREFIX_ADDRESS);
+        Optional<CommandPart> addressString = argMultimap.getValue(PREFIX_ADDRESS);
         Optional<Address> address;
         if (role.equals(Role.PROFESSOR)) {
             if (addressString.isPresent()) {

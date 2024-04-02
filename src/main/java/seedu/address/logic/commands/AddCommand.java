@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -22,7 +22,9 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": Adds a person to the address book.\n";
+
+    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
@@ -55,11 +57,11 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandExecutionException {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandExecutionException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);

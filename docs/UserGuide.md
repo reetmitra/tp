@@ -68,12 +68,17 @@ NUSContacts is a **desktop app for managing contacts, optimized for use via a Co
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message listing out all the available commands and their purpose.
 
 Format: `help`
 
+For more information regarding the comamnd formats and examples, press `F1` to open up a help window (as shown in the picture below).
+To close the help window, you can simply press `esc` on your keyboard (other methods such as `alt`+`F4` and clicking on
+the red `X` button on the top right corner of the window also works).
+
+![help message](images/helpMessage.png)
+
+The project website includes the NUSContacts user guide, which contains a more detailed description of each command.
 
 ### Adding a person: `add`
 
@@ -86,12 +91,16 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/STUDENT a/PGPR c/CS2101`
+* `add n/John Doe p/98765432 e/johnd@example.com r/student a/PGPR c/CS2101`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/TA a/COM2-0102 c/ST2334`
 
 Unlike the `edit` command, `t/` with an empty tag is not supported.
 If you want to not include any tag, leave out `t/TAG` entirely.
 Similarly, `p/` without any phone number is not supported, if you want to not specify the phone number, leave out `p/PHONE` entirely.
+
+The allowed roles are `Student`, `TA`, or `Professor`.
+The input is case-insensitive, and you can type an unambiguous prefix to specify the role.
+For example, you can type `r/s` instead of `r/student` as shown above.
 
 ### Listing all persons : `list`
 
