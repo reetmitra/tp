@@ -30,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.exceptions.InvalidAddressException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -111,10 +112,13 @@ public class EditCommand extends Command {
         Optional<Address> updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return Person.createPerson(
-            updatedName, updatedPhone, updatedEmail, updatedRole,
-            updatedAddress, updatedCourse, updatedTags);
+        try {
+            return Person.createPerson(
+                    updatedName, updatedPhone, updatedEmail, updatedRole,
+                    updatedAddress, updatedCourse, updatedTags);
+        } catch (InvalidAddressException e) {
+            throw new CommandExecutionException(e.getMessage());
+        }
     }
 
     @Override

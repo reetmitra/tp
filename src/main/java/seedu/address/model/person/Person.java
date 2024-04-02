@@ -96,12 +96,8 @@ public class Person {
      */
     public static Person createPerson(Name name, Optional<Phone> phone, Email email, Role role,
                                       Optional<Address> address, Course course, Set<Tag> tags)
-            throws CommandExecutionException {
-        try {
-            return new Person(name, phone, email, role, address, course, tags);
-        } catch (InvalidAddressException e) {
-            throw new CommandExecutionException(Address.MESSAGE_CONSTRAINTS_INVALID_PROFESSOR);
-        }
+            throws InvalidAddressException {
+        return new Person(name, phone, email, role, address, course, tags);
     }
 
     /**
@@ -124,6 +120,7 @@ public class Person {
      * @throws IllegalArgumentException
      */
     public static void validateAddress(Role role, Optional<Address> address) {
+        assert role != null;
         if (role == Role.PROFESSOR && address.isEmpty()) {
             throw new InvalidAddressException(Address.MESSAGE_CONSTRAINTS_INVALID_PROFESSOR);
         }
