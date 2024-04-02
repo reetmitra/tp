@@ -15,13 +15,24 @@ public class ParseException extends IllegalValueException implements CommandExce
      */
     private final Optional<CommandPart> erroneousPart;
 
-    private ParseException(String message, Optional<CommandPart> erroneousPart) {
+    /**
+     * Constructs a {@code ParseException} with the specified detail message and command part.
+     * @param message The detail message.
+     * @param erroneousPart The part of the command that causes the error, if any.
+     */
+    public ParseException(String message, Optional<CommandPart> erroneousPart) {
         super(message);
         assert erroneousPart != null;
         this.erroneousPart = erroneousPart;
     }
 
-    private ParseException(String message, Throwable cause, Optional<CommandPart> erroneousPart) {
+    /**
+     * Constructs a {@code ParseException} with the specified detail message, command part, and cause.
+     * @param message The detail message.
+     * @param cause The cause of the error.
+     * @param erroneousPart The part of the command that causes the error, if any.
+     */
+    public ParseException(String message, Throwable cause, Optional<CommandPart> erroneousPart) {
         super(message, cause);
         assert erroneousPart != null;
         this.erroneousPart = erroneousPart;

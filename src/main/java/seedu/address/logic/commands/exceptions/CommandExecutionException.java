@@ -14,13 +14,24 @@ public class CommandExecutionException extends Exception implements CommandExcep
      */
     private final Optional<CommandPart> erroneousPart;
 
-    private CommandExecutionException(String message, Optional<CommandPart> erroneousPart) {
+    /**
+     * Constructs a {@code CommandExecutionException} with the specified detail message and command part.
+     * @param message The detail message.
+     * @param erroneousPart The part of the command that causes the error, if any.
+     */
+    public CommandExecutionException(String message, Optional<CommandPart> erroneousPart) {
         super(message);
         assert erroneousPart != null;
         this.erroneousPart = erroneousPart;
     }
 
-    private CommandExecutionException(String message, Throwable cause, Optional<CommandPart> erroneousPart) {
+    /**
+     * Constructs a {@code CommandExecutionException} with the specified detail message, command part, and cause.
+     * @param message The detail message.
+     * @param cause The cause of the error.
+     * @param erroneousPart The part of the command that causes the error, if any.
+     */
+    public CommandExecutionException(String message, Throwable cause, Optional<CommandPart> erroneousPart) {
         super(message, cause);
         assert erroneousPart != null;
         this.erroneousPart = erroneousPart;

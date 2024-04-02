@@ -18,12 +18,24 @@ public class Phone {
     /**
      * Constructs a {@code Phone}.
      *
-     * @param phone A valid phone number.
+     * @param phone A phone number.
+     * @param shouldCheck If true, check if the phone number is valid.
+     */
+    public Phone(String phone, boolean shouldCheck) {
+        requireNonNull(phone);
+        if (shouldCheck) {
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        }
+        value = phone;
+    }
+
+    /**
+     * Constructs a valid {@code Phone}.
+     *
+     * @param phone A phone number.
      */
     public Phone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        this(phone, true);
     }
 
     /**
