@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.exceptions.InvalidAddressException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,11 +32,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(
-            Name name, Optional<Phone> phone, Email email, Role role,
+    public Person(Name name, Optional<Phone> phone, Email email, Role role,
             Optional<Address> address, Course course, Set<Tag> tags) {
 
         requireAllNonNull(name, phone, email, role, address, course, tags);
+
+        // Check for valid address based on the person's role
+        validateAddress(role, address);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -78,6 +82,24 @@ public class Person {
     }
 
     /**
+     * Creates a new Person object with the given parameters.
+     * @param name The name of the person.
+     * @param phone The phone number of the person.
+     * @param email The email of the person.
+     * @param role The role of the person.
+     * @param address The address of the person.
+     * @param course The course of the person.
+     * @param tags The tags of the person.
+     * @return A new Person object.
+     * @throws InvalidAddressException If the address is invalid.
+     */
+    public static Person createPerson(Name name, Optional<Phone> phone, Email email, Role role,
+                                      Optional<Address> address, Course course, Set<Tag> tags)
+            throws InvalidAddressException {
+        return new Person(name, phone, email, role, address, course, tags);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -91,14 +113,15 @@ public class Person {
     }
 
     /**
-     * Returns false only if Professors do not have an address.
+     * Validates the address based on the person's role.
+     * @param role
+     * @param address
+     * @throws IllegalArgumentException
      */
-    public boolean hasValidAddress() {
-        // checks if a Professor has an address
-        if (this.role == Role.PROFESSOR) {
-            return this.address.isPresent();
-        } else {
-            return true;
+    public static void validateAddress(Role role, Optional<Address> address) {
+        assert role != null;
+        if (role == Role.PROFESSOR && address.isEmpty()) {
+            throw new InvalidAddressException(Address.MESSAGE_CONSTRAINTS_INVALID_PROFESSOR);
         }
     }
 
