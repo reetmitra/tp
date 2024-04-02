@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.model.person.exceptions.InvalidAddressException;
 import seedu.address.model.tag.Tag;
 
@@ -92,7 +91,7 @@ public class Person {
      * @param course The course of the person.
      * @param tags The tags of the person.
      * @return A new Person object.
-     * @throws CommandExecutionException If the address is invalid.
+     * @throws InvalidAddressException If the address is invalid.
      */
     public static Person createPerson(Name name, Optional<Phone> phone, Email email, Role role,
                                       Optional<Address> address, Course course, Set<Tag> tags)
