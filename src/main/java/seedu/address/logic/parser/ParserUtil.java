@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_FORCE_TAG_MUST_BE_EMPTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -86,29 +88,41 @@ public class ParserUtil {
      * Parses a {@code CommandPart phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param shouldCheck If true, check if the phone number is valid.
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(CommandPart phone) throws ParseException {
+    public static Phone parsePhone(CommandPart phone, boolean shouldCheck) throws ParseException {
         requireNonNull(phone);
         CommandPart trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone.toString())) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS, trimmedPhone);
+        try {
+            return new Phone(trimmedPhone.toString(), shouldCheck);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), trimmedPhone);
         }
-        return new Phone(trimmedPhone.toString());
+    }
+
+    public static Phone parsePhone(CommandPart phone) throws ParseException {
+        return parsePhone(phone, true);
     }
 
     /**
      * Parses a {@code CommandPart phone} into a {@code Optional<Phone>}, allowing empty input.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param shouldCheck If true, check if the phone number is valid.
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Optional<Phone> parseOptionalPhone(CommandPart phone) throws ParseException {
+    public static Optional<Phone> parseOptionalPhone(CommandPart phone, boolean shouldCheck) throws ParseException {
         requireNonNull(phone);
-        if (phone.trim().isEmpty()) {
+        CommandPart trimmedPhone = phone.trim();
+        if (trimmedPhone.isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of(parsePhone(phone.trim()));
+        return Optional.of(parsePhone(trimmedPhone, shouldCheck));
+    }
+
+    public static Optional<Phone> parseOptionalPhone(CommandPart phone) throws ParseException {
+        return parseOptionalPhone(phone, true);
     }
 
     /**
@@ -145,30 +159,38 @@ public class ParserUtil {
      * Parses a {@code CommandPart email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param shouldCheck If true, check if the phone number is valid.
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(CommandPart email) throws ParseException {
+    public static Email parseEmail(CommandPart email, boolean shouldCheck) throws ParseException {
         requireNonNull(email);
         CommandPart trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail.toString())) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS, trimmedEmail);
+        try {
+            return new Email(trimmedEmail.toString(), shouldCheck);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), trimmedEmail);
         }
-        return new Email(trimmedEmail.toString());
+    }
+
+    public static Email parseEmail(CommandPart email) throws ParseException {
+        return parseEmail(email, true);
     }
 
     /**
      * Parses a {@code CommandPart course} into an {@code Course}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param shouldCheck If true, check if the course is valid.
      * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Course parseCourse(CommandPart course) throws ParseException {
+    public static Course parseCourse(CommandPart course, boolean shouldCheck) throws ParseException {
         requireNonNull(course);
         CommandPart trimmedCourse = course.trim();
-        if (!Course.isValidCourse(trimmedCourse.toString())) {
-            throw new ParseException(Course.MESSAGE_CONSTRAINTS, trimmedCourse);
+        try {
+            return new Course(trimmedCourse.toString(), shouldCheck);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), trimmedCourse);
         }
-        return new Course(trimmedCourse.toString());
     }
 
     /**
@@ -236,5 +258,18 @@ public class ParserUtil {
         }
 
         return matchedStrings;
+    }
+
+    /**
+     * Parses the {@code shouldCheck} flag from the argument multimap.
+     * @return true if the {@code PREFIX_FORCE} flag is absent, false otherwise.
+     */
+    public static boolean parseShouldCheckFlag(ArgumentMultimap<CommandPart> argMultimap) throws ParseException {
+        boolean isForced = argMultimap.getValue(PREFIX_FORCE).isPresent();
+        if (isForced && !argMultimap.getValue(PREFIX_FORCE).get().isEmpty()) {
+            throw new ParseException(MESSAGE_FORCE_TAG_MUST_BE_EMPTY, argMultimap.getValue(PREFIX_FORCE).get());
+        }
+        boolean shouldCheck = !isForced;
+        return shouldCheck;
     }
 }

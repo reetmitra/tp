@@ -32,11 +32,23 @@ public class Course {
      * Constructs a {@code Course}.
      *
      * @param course A valid course code.
+     * @param shouldCheck If true, check if the course code is valid.
+     */
+    public Course(String course, boolean shouldCheck) {
+        requireNonNull(course);
+        if (shouldCheck) {
+            checkArgument(isValidCourse(course), MESSAGE_CONSTRAINTS);
+        }
+        this.value = course.toUpperCase().trim();
+    }
+
+    /**
+     * Constructs a valid {@code Course}.
+     *
+     * @param course A valid course code.
      */
     public Course(String course) {
-        requireNonNull(course);
-        checkArgument(isValidCourse(course), MESSAGE_CONSTRAINTS);
-        this.value = course.toUpperCase().trim();
+        this(course, true);
     }
 
     /**
