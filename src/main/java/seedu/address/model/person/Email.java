@@ -36,12 +36,24 @@ public class Email {
     /**
      * Constructs an {@code Email}.
      *
-     * @param email A valid email address.
+     * @param email An email address.
+     * @param shouldCheck If true, check if the phone number is valid.
+     */
+    public Email(String email, boolean shouldCheck) {
+        requireNonNull(email);
+        if (shouldCheck) {
+            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        }
+        value = email;
+    }
+
+    /**
+     * Constructs a valid {@code Email}.
+     *
+     * @param email An email address.
      */
     public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        this(email, true);
     }
 
     /**

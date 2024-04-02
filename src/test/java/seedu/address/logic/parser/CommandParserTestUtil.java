@@ -33,7 +33,16 @@ public class CommandParserTestUtil {
             parser.parse(new CommandPart(new CommandString(userInput)));
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
-            assertEquals(expectedMessage, pe.getMessage());
+            if (expectedMessage != null) {
+                assertEquals(expectedMessage, pe.getMessage());
+            }
         }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful'll.
+     */
+    public static void assertParseFailure(Parser<? extends Command> parser, String userInput) {
+        assertParseFailure(parser, userInput, null);
     }
 }
