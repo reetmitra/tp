@@ -31,11 +31,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(
-            Name name, Optional<Phone> phone, Email email, Role role,
+    public Person(Name name, Optional<Phone> phone, Email email, Role role,
             Optional<Address> address, Course course, Set<Tag> tags) {
 
         requireAllNonNull(name, phone, email, role, address, course, tags);
+
+        // Check for valid address based on the person's role
+        validateAddress(role, address);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -99,6 +102,18 @@ public class Person {
             return this.address.isPresent();
         } else {
             return true;
+        }
+    }
+
+    /**
+     * Validates the address based on the person's role.
+     * @param role
+     * @param address
+     * @throws IllegalArgumentException
+     */
+    public static void validateAddress(Role role, Optional<Address> address) {
+        if (role == Role.PROFESSOR && address.isEmpty()) {
+            throw new IllegalArgumentException(Address.MESSAGE_CONSTRAINTS_INVALID_PROFESSOR);
         }
     }
 
