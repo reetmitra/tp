@@ -92,6 +92,7 @@ public class EditCommand extends Command {
             throw new CommandExecutionException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        model.saveAddressBook(); // Save previous copy of address book if command execution successful.
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
