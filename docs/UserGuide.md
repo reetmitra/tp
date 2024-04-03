@@ -129,14 +129,14 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names or contain any of the given keywords.
+Finds persons whose names or course contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name and course are searched.
-* Only full words will be matched  
+* Only full words will be matched.  
   e.g. `Han` will not match `Hans`, `cs2103` will not match `CS2103T`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).  
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`  
