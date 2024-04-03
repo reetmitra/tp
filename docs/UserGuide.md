@@ -135,14 +135,18 @@ Finds persons whose names or course contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`.
+* The search is case-insensitive.  
+  e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`, `student` will match `STUDENT`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name and course are searched.
+* Only the name, course and role are searched.
 * Only full words will be matched.  
-  e.g. `Han` will not match `Hans`, `cs2103` will not match `CS2103T`.
+  e.g. `Han` will not match `Hans`.  
+  e.g. `cs2103` will not match `CS2103T`.  
+  e.g. `stu` will not match `STUDENT`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).  
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.  
-  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.
+  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.  
+  e.g. `Hans TA` will return `Hans Gruber`, `Bo Yang` whose role is TA.
   
 
 Examples:
@@ -151,6 +155,8 @@ Examples:
   ![result for 'find alex david'](images/findYangTimothyResult.png)
 * `find yang cs2109s` returns `Yang Heebeom`, `Reet`.<br>
   ![result for 'find alex david'](images/findYangCS2109SResult.png)
+* `find yang professor` returns `Yang Heebeom`, `HongDuc`.<br>
+    ![result for 'find alex david'](images/findYangProfessorResult.png)
 
 ### Deleting a person : `delete`
 
@@ -231,6 +237,6 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                                                                         |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T`                                                                                                              |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
 | **List**   | `list`                                                                                                                                                                          |
 | **Help**   | `help`                                                                                                                                                                          |
