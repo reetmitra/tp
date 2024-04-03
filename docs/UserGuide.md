@@ -133,21 +133,21 @@ Finds persons whose names or course contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name and course are searched.
 * Only full words will be matched.  
-  e.g. `Han` will not match `Hans`, `cs2103` will not match `CS2103T`
+  e.g. `Han` will not match `Hans`, `cs2103` will not match `CS2103T`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).  
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`  
-  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.  
+  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.
   
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find yang timothy` returns `Yang Heebeom`, `Timothy`<br>
+* `find John` returns `john` and `John Doe`.
+* `find yang timothy` returns `Yang Heebeom`, `Timothy`.<br>
   ![result for 'find alex david'](images/findYangTimothyResult.png)
-* `find yang cs2109s` returns `Yang Heebeom`, `Reet`<br>
+* `find yang cs2109s` returns `Yang Heebeom`, `Reet`.<br>
   ![result for 'find alex david'](images/findYangCS2109SResult.png)
 
 ### Deleting a person : `delete`
