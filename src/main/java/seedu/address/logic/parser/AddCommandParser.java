@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_FIX_OR_ADD_FORCE_FLAG;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -34,32 +36,43 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
+    public AddCommand parse(CommandPart args) throws ParseException {
+        ArgumentMultimap<CommandPart> argMultimap =
                 ArgumentTokenizer.tokenize(
                     args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,
-                    PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_TAG);
+                    PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_TAG, PREFIX_FORCE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_COURSE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Optional<String> phoneString = argMultimap.getValue(PREFIX_PHONE);
-        Optional<Phone> phone;
-        if (phoneString.isPresent()) {
-            phone = Optional.of(ParserUtil.parsePhone(phoneString.get()));
-        } else {
-            phone = Optional.empty();
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_FORCE);
 
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        boolean shouldCheck = ParserUtil.parseShouldCheckFlag(argMultimap);
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Optional<CommandPart> phoneString = argMultimap.getValue(PREFIX_PHONE);
+        Optional<Phone> phone;
+        Email email;
+        Course course;
+        try {
+            if (phoneString.isPresent()) {
+                phone = Optional.of(ParserUtil.parsePhone(phoneString.get(), shouldCheck));
+            } else {
+                phone = Optional.empty();
+            }
+
+            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get(), shouldCheck);
+            course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get(), shouldCheck);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_FIX_OR_ADD_FORCE_FLAG, pe.getMessage()),
+                    pe.getErroneousPart());
+        }
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
 
-        Optional<String> addressString = argMultimap.getValue(PREFIX_ADDRESS);
+        Optional<CommandPart> addressString = argMultimap.getValue(PREFIX_ADDRESS);
         Optional<Address> address;
         if (role.equals(Role.PROFESSOR)) {
             if (addressString.isPresent()) {
@@ -76,7 +89,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
         }
 
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, role, address, course, tagList);

@@ -30,7 +30,8 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT =
+        Pattern.compile("\\s*(?<commandWord>\\w+)(?<arguments>.*?)\\s*");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -54,14 +55,16 @@ public class AddressBookParser {
      * @return The command based on the user input.
      * @throws ParseException If the user input does not conform the expected format.
      */
-    public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+    public Command parseCommand(CommandString userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.toString());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final CommandPart commandWord = new CommandPart(userInput).getSubstring(
+                matcher.start("commandWord"), matcher.end("commandWord"));
+        final CommandPart arguments = new CommandPart(userInput).getSubstring(
+                matcher.start("arguments"), matcher.end("arguments"));
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
@@ -69,9 +72,9 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         // Get a list of commands that matches the input command.
-        List<String> matchedCommands = ParserUtil.filterByPrefix(commandWord, COMMANDS);
+        List<String> matchedCommands = ParserUtil.filterByPrefix(commandWord.toString(), COMMANDS);
 
-        String command = commandWord;
+        String command = commandWord.toString();
         if (matchedCommands.size() == 1) {
             command = matchedCommands.get(0);
         } else if (matchedCommands.size() > 1) {
@@ -121,7 +124,7 @@ public class AddressBookParser {
      * @param arguments The arguments provided.
      * @throws ParseException If arguments are provided.
      */
-    private void ensureNoArgument(String command, String arguments) throws ParseException {
+    private void ensureNoArgument(String command, CommandPart arguments) throws ParseException {
         if (!arguments.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_UNEXPECTED_ARGUMENT, command));
         }
