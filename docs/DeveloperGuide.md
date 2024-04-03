@@ -406,7 +406,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**UC3: Find a tutor by name**
+**UC3: Edit a tutor**
+
+**MSS**
+
+1. User requests to edit a tutor
+2. User provides the field to edit and the new value
+3. NUSContacts edits the tutor
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User provides an empty address for a PROFESSOR. 
+    * 2a1. NUSContacts shows an error message.
+      
+      Use case resumes at step 2.
+* 2b. User gives a tutor without an address the PROFESSOR role.
+    * 2b1. NUSContacts shows an error message.
+    
+      Use case resumes at step 2.
+
+
+**UC4: Find a tutor by name**
 
 **MSS**
 
@@ -424,7 +446,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**UC4: Find a tutor by course code**
+**UC5: Find a tutor by course code**
 
 **MSS**
 
