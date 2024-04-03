@@ -1,15 +1,18 @@
 package seedu.address.logic.commands;
 
-import javafx.scene.input.ClipboardContent;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 
+/**
+ * Copies the email of the person identified by the index number used in the displayed person list.
+ */
 public class CopyCommand extends Command {
 
     public static final String COMMAND_WORD = "copy";
