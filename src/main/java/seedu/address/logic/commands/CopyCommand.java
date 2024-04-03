@@ -46,6 +46,20 @@ public class CopyCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof CopyCommand)) {
+            return false;
+        }
+
+        CopyCommand otherCopyCommand = (CopyCommand) other;
+        return targetIndex.equals(otherCopyCommand.targetIndex);
+    }
+
     private void copyEmail(String email) {
         StringSelection stringSelection = new StringSelection(email);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
