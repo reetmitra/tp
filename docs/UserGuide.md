@@ -108,6 +108,9 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+* After using commands like `find`, the list may no longer display all contacts.
+* Use `list` to revert the list to the full list of contacts in the order they were added.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
