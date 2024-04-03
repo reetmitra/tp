@@ -15,7 +15,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CLASSMATE;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
