@@ -108,7 +108,7 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-* See [Note](#note-) under [Locating Persons by name](#locating-persons-by-name--find) to understand how the `list` command can be useful.
+* See [note](#note-) under [Locating Persons by Name](#locating-persons-by-name--find) to understand how the `list` command can be useful.
 
 ### Editing a person : `edit`
 
