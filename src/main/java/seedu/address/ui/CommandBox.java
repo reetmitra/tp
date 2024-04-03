@@ -50,8 +50,8 @@ public class CommandBox extends UiPart<Region> {
 
         final CommandString commandString = new CommandString(commandText);
         try {
-            commandExecutor.execute(commandText);
-            commandHistory.addCommand(commandText);
+            commandExecutor.execute(commandString);
+            commandHistory.addCommand(commandString);
             commandTextField.setText("");
         } catch (CommandExecutionException | ParseException e) {
             setStyleToIndicateCommandFailure();
@@ -71,11 +71,15 @@ public class CommandBox extends UiPart<Region> {
         final KeyCode keyCode = keyEvent.getCode();
 
         if (keyCode == KeyCode.UP) {
-            String text = commandHistory.getPreviousCommandHistory(commandTextField.getText());
+            CommandString currentCommandText = new CommandString(commandTextField.getText());
+            String text = commandHistory.getPreviousCommandHistory(currentCommandText).toString();
+
             commandTextField.setText(text);
             commandTextField.positionCaret(text.length()); // Set caret to be at the right-end.
         } else if (keyCode == KeyCode.DOWN) {
-            String text = commandHistory.getNextCommandHistory(commandTextField.getText());
+            CommandString currentCommandText = new CommandString(commandTextField.getText());
+            String text = commandHistory.getNextCommandHistory(currentCommandText).toString();
+
             commandTextField.setText(text);
             commandTextField.positionCaret(text.length()); // Set caret to be at the right-end.
         }
