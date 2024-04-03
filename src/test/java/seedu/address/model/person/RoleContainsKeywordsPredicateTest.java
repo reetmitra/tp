@@ -42,7 +42,7 @@ public class RoleContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_RoleContainsKeywords_returnsTrue() {
+    public void test_roleContainsKeywords_returnsTrue() {
         // One keyword
         RoleContainsKeywordsPredicate predicate =
                 new RoleContainsKeywordsPredicate(Collections.singletonList("TA"));
