@@ -61,7 +61,7 @@ NUSContacts is a **desktop app for managing contacts, optimized for use via a Co
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * For commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`), specifying any extraneous parameters for them
-  will result in an `invalid command format` error message. Make sure to just enter these commands as it is. 
+  will result in an `Invalid command format!` error message. Make sure to just enter these commands as it is. 
 
 * You can navigate between past successful commands by pressing the `UP` and `DOWN` arrow keys.
 
