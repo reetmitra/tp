@@ -108,8 +108,7 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-* After using commands like `find`, the list may no longer display all contacts.
-* Use `list` to revert the list to the full list of contacts in the order they were added.
+* See [Note](#note-) under [Locating Persons by name](#locating-persons-by-name--find) to understand how the `list` command can be useful.
 
 ### Editing a person : `edit`
 
@@ -147,6 +146,9 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find yang timothy` returns `Yang Heebeom`, `Timothy`<br>
   ![result for 'find alex david'](images/findYangTimothyResult.png)
+
+#### Note:
+* After using `find`, the list may no longer display all saved contacts. Use `list` to revert the list to the full list of contacts in the order they were added.
 
 ### Deleting a person : `delete`
 
