@@ -73,8 +73,9 @@ Shows a message listing out all the available commands and their purpose.
 Format: `help`
 
 For more information regarding the command formats and examples, press `F1` to open up a help window (as shown in the picture below).
-To close the help window, you can simply press `esc` on your keyboard (other methods such as `alt`+`F4` and clicking on
-the red `X` button in the top right corner of the window also works).
+
+To close the help window, you can simply press `esc` on your keyboard. Windows users may also use 
+`alt`+`F4` or click on the red `X` in the top right corner of the window.
 
 ![help message](images/helpMessage.png)
 
@@ -131,21 +132,26 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names or course contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g. `hans` will match `Hans`, `cs2103t` will match `CS2103T`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the name and course are searched.
+* Only full words will be matched.  
+  e.g. `Han` will not match `Hans`, `cs2103` will not match `CS2103T`.
+* Persons matching at least one keyword will be returned (i.e. `OR` search).  
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.  
+  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.
+  
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find yang timothy` returns `Yang Heebeom`, `Timothy`<br>
+* `find John` returns `john` and `John Doe`.
+* `find yang timothy` returns `Yang Heebeom`, `Timothy`.<br>
   ![result for 'find alex david'](images/findYangTimothyResult.png)
+* `find yang cs2109s` returns `Yang Heebeom`, `Reet`.<br>
+  ![result for 'find alex david'](images/findYangCS2109SResult.png)
 
 #### Note:
 * After using `find`, the list may no longer display all saved contacts. Use `list` to revert the list to the full list of contacts in the order they were added.
@@ -229,6 +235,6 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                                                                         |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                      |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T`                                                                                                              |
 | **List**   | `list`                                                                                                                                                                          |
 | **Help**   | `help`                                                                                                                                                                          |
