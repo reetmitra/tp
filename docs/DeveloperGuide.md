@@ -421,8 +421,6 @@ Team size: 5
 
 1. Currently, if any component (name, email, etc.) is too long, it will be hidden on the screen. We plan to implement
    appropriate mechanism to show the full component.
-2. Currently, names like "`John Doe`" and "`John  Doe`" (two spaces in the middle) are considered different. We plan
-   to have more sophisticated duplication detection mechanism.
 3. Currently, `undo` only supports undoing one command. We plan to support undoing multiple commands.
 4. Currently, a professor must have an address attached. This is reasonable in most cases; however, some visiting
    instructor may not have a specific office address in NUS. Therefore, we plan to allow omitting the field if the user desires.
