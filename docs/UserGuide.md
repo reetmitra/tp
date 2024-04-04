@@ -47,11 +47,6 @@ NUSContacts is a **desktop app for managing contacts, optimized for use via a Co
 
 You can navigate between past successful commands by pressing the `UP` and `DOWN` arrow keys.
 
-#### Highlighting erroneous part of the command
-
-When a command contains an error, the program will try to detect the part of the command that causes the error, and
-selects it in the command box.
-
 #### Saving the data
 
 NUSContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -290,6 +285,65 @@ Exits the program.
 
 Format: `exit`
 
+### Miscellaneous features
+
+You don't need to know about these features on the first read.
+
+#### Highlighting erroneous part of the command
+
+When a command contains an error, the program will try to detect the part of the command that causes the error, and
+selects it in the command box.
+
+#### Escape special characters
+
+Naturally, because `n/` denotes the name, it is not possible to include it into part of many commands.
+If you want to, you need to escape the slash `/`.
+
+For example:
+
+* If you want to edit the first contact to have a tag with content `info = n/a`, the following is incorrect:
+
+    ```
+    edit 1 t/info = n/a
+    ```
+
+    since `n/a` will be interpreted as editing the name of the first contact to `a`.
+
+    Instead, you use a backslash to escape the slash as follows:
+
+    ```
+    edit 1 t/info = n\/a
+    ```
+
+* How can you escape a backslash? By using another backslash (the following will add a tag with content
+    `included in people \ students`):
+    ```
+    edit 1 t/included in people \\ students
+    ```
+
+    Other characters should not be escaped.
+
+* Here are more examples.
+
+    | If you want to enter | You should type |
+    |--|--|
+    | `a/b` | `a\/b` |
+    | `a\/b` | `a\\\/b` |
+    | `a\\b` | `a\\\\b` |
+
+* You should not enter invalid escape sequences, but if you do, the program will make a guess on what you mean.
+
+    | If you type | The program will guess you wanted to type |
+    |--|--|
+    | `a\\\b` | `a\\\\b` |
+    | `x/y` | `x\/y` |
+
+* Here are some example commands.
+
+  * `add n/John s\/o Doe p/98765432 e/johnd@example.com r/student a/PGPR c/CS2103T` will add a contact with name
+    `John s/o Doe`.
+  * `find John s\/o Doe` will be able to find that person.
+  * `edit 2 t/birthday: 3\/2` will edit the tag list of the 2nd person to have a single tag `birthday: 3/2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,11 +352,24 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSContacts home folder.
 
+**Q**: How do I include special characters such as `/` into the name, address or tag?<br>
+**A**: Refer to ["Escape special characters" section](#escape-special-characters).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+2. A professor must have an address attached. This is reasonable in most cases; however, some visiting
+   instructor may not have a specific office address in NUS.
+
+   Because address can be any nonempty string, you can work around this issue by typing "`none`" or similar into the address field.
+   The program will not handle this input specially, however.
+
+3. Refer to [list of planned enhancements](DeveloperGuide.html#appendix-planned-enhancements) in [the developer
+   guide](DeveloperGuide.html).
+
 
 --------------------------------------------------------------------------------------------------------------------
 

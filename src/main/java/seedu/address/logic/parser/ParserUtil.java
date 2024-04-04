@@ -78,10 +78,12 @@ public class ParserUtil {
     public static Name parseName(CommandPart name) throws ParseException {
         requireNonNull(name);
         CommandPart trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName.toString())) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS, trimmedName);
+        String unescapedName = StringUtil.unescapeString(trimmedName.toString());
+        try {
+            return new Name(unescapedName);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), trimmedName);
         }
-        return new Name(trimmedName.toString());
     }
 
     /**
@@ -94,8 +96,9 @@ public class ParserUtil {
     public static Phone parsePhone(CommandPart phone, boolean shouldCheck) throws ParseException {
         requireNonNull(phone);
         CommandPart trimmedPhone = phone.trim();
+        String unescapedPhone = StringUtil.unescapeString(trimmedPhone.toString());
         try {
-            return new Phone(trimmedPhone.toString(), shouldCheck);
+            return new Phone(unescapedPhone, shouldCheck);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage(), trimmedPhone);
         }
@@ -134,10 +137,12 @@ public class ParserUtil {
     public static Address parseAddress(CommandPart address) throws ParseException {
         requireNonNull(address);
         CommandPart trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress.toString())) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS, trimmedAddress);
+        String unescapedAddress = StringUtil.unescapeString(trimmedAddress.toString());
+        try {
+            return new Address(unescapedAddress);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), trimmedAddress);
         }
-        return new Address(trimmedAddress.toString());
     }
 
     /**
@@ -165,8 +170,9 @@ public class ParserUtil {
     public static Email parseEmail(CommandPart email, boolean shouldCheck) throws ParseException {
         requireNonNull(email);
         CommandPart trimmedEmail = email.trim();
+        String unescapedEmail = StringUtil.unescapeString(trimmedEmail.toString());
         try {
-            return new Email(trimmedEmail.toString(), shouldCheck);
+            return new Email(unescapedEmail, shouldCheck);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage(), trimmedEmail);
         }
@@ -186,8 +192,9 @@ public class ParserUtil {
     public static Course parseCourse(CommandPart course, boolean shouldCheck) throws ParseException {
         requireNonNull(course);
         CommandPart trimmedCourse = course.trim();
+        String unescapedCourse = StringUtil.unescapeString(trimmedCourse.toString());
         try {
-            return new Course(trimmedCourse.toString(), shouldCheck);
+            return new Course(unescapedCourse, shouldCheck);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage(), trimmedCourse);
         }
@@ -203,7 +210,9 @@ public class ParserUtil {
     public static Role parseRole(CommandPart role) throws ParseException {
         requireNonNull(role);
         CommandPart trimmedRole = role.trim();
-        List<String> matchedRoles = ParserUtil.filterByPrefix(trimmedRole.toString().toUpperCase(), Role.getAllRoles());
+        String unescapedRole = StringUtil.unescapeString(trimmedRole.toString());
+        // at the moment none of the roles can have any / or \ in it regardless, this is just in case
+        List<String> matchedRoles = ParserUtil.filterByPrefix(unescapedRole.toUpperCase(), Role.getAllRoles());
         if (matchedRoles.size() == 1) {
             return Role.valueOf(matchedRoles.get(0));
         } else {
@@ -220,10 +229,12 @@ public class ParserUtil {
     public static Tag parseTag(CommandPart tag) throws ParseException {
         requireNonNull(tag);
         CommandPart trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag.toString())) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS, trimmedTag);
+        String unescapedTag = StringUtil.unescapeString(trimmedTag.toString());
+        try {
+            return new Tag(unescapedTag);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), trimmedTag);
         }
-        return new Tag(trimmedTag.toString());
     }
 
     /**
