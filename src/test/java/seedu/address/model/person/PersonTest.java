@@ -12,7 +12,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -91,11 +90,16 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
     }
 
-    @Disabled
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName()
+            + "{name=" + ALICE.getName()
+            + ", phone=" + ALICE.getPhone()
+            + ", email=" + ALICE.getEmail()
+            + ", role=" + ALICE.getRole()
+            + ", address=" + ALICE.getAddress()
+            + ", course=" + ALICE.getCourse()
+            + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

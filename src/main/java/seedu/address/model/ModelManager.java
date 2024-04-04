@@ -23,6 +23,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private AddressBook previousAddressBook;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -31,6 +33,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        this.previousAddressBook = null;
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
@@ -85,6 +88,17 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void saveAddressBook() {
+        previousAddressBook = addressBook.copy();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        addressBook.resetData(previousAddressBook);
+        previousAddressBook = null;
     }
 
     @Override

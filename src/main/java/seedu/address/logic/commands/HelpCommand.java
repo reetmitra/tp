@@ -20,6 +20,7 @@ public class HelpCommand extends Command {
             + "5. " + DeleteCommand.COMMAND_DESCRIPTION
             + "6. " + ClearCommand.COMMAND_DESCRIPTION
             + "7. " + ExitCommand.COMMAND_DESCRIPTION
+            + "8. " + UndoCommand.COMMAND_DESCRIPTION
             + "For more detailed information on each command, please press F1 to refer to the project website.";
 
 

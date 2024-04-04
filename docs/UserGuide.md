@@ -60,8 +60,10 @@ NUSContacts is a **desktop app for managing contacts, optimized for use via a Co
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* For commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`), specifying any extraneous parameters for them
+  will result in an `Invalid command format!` error message. Make sure to just enter these commands as it is. 
+
+* You can navigate between past successful commands by pressing the `UP` and `DOWN` arrow keys.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -136,14 +138,18 @@ Finds persons whose names or course contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`, `cs2103t` will match `CS2103T`.
+* The search is case-insensitive.  
+  e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`, `student` will match `STUDENT`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name and course are searched.
+* Only the name, course and role are searched.
 * Only full words will be matched.  
-  e.g. `Han` will not match `Hans`, `cs2103` will not match `CS2103T`.
+  e.g. `Han` will not match `Hans`.  
+  e.g. `cs2103` will not match `CS2103T`.  
+  e.g. `stu` will not match `STUDENT`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).  
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.  
-  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.
+  e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.  
+  e.g. `Hans TA` will return `Hans Gruber`, `Bo Yang` whose role is TA.
   
 
 Examples:
@@ -152,6 +158,8 @@ Examples:
   ![result for 'find alex david'](images/findYangTimothyResult.png)
 * `find yang cs2109s` returns `Yang Heebeom`, `Reet`.<br>
   ![result for 'find alex david'](images/findYangCS2109SResult.png)
+* `find yang professor` returns `Yang Heebeom`, `HongDuc`.<br>
+    ![result for 'find alex david'](images/findYangProfessorResult.png)
 
 #### Note:
 * After using `find`, the list may no longer display all saved contacts. Use `list` to revert the list to the full list of contacts in the order they were added.
@@ -235,6 +243,6 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                                                                         |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T`                                                                                                              |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
 | **List**   | `list`                                                                                                                                                                          |
 | **Help**   | `help`                                                                                                                                                                          |

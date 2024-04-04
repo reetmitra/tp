@@ -67,7 +67,7 @@ public class CourseContainsKeywordsPredicateTest {
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("CS2109"));
         assertFalse(predicate.test(new PersonBuilder().withCourse("CS2103T").build()));
 
-        // Keywords match phone, email and address, but does not match name
+        // Keywords match phone, email and address, but does not match course
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withCourse("CS2103T").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
