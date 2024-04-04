@@ -96,6 +96,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
+    /**
+     * Creates a new copy of the current {@code AddressBook}.
+     * @return The new copy of the AddressBook.
+     */
+    public AddressBook copy() {
+        return new AddressBook(this);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

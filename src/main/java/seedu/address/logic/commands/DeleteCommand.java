@@ -64,6 +64,7 @@ public class DeleteCommand extends Command {
             peopleToDelete[i] = personToDelete;
         }
 
+        model.saveAddressBook(); // Save previous copy of address book if command execution successful.
         String resultMessage = "";
 
         // Delete the people from model.

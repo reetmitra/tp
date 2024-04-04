@@ -66,6 +66,7 @@ public class AddCommand extends Command {
             throw new CommandExecutionException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        model.saveAddressBook(); // Save previous copy of address book if command execution successful.
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

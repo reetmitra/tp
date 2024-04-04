@@ -135,6 +135,14 @@ public class AddCommandTest {
         }
 
         @Override
+        public void saveAddressBook() {}
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
