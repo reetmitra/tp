@@ -276,7 +276,13 @@ will only show an error message (`No new changes has been made to the data`).
 Likewise, entering `undo` with no prior changes will also display the same error message.
 
 **Note:** `undo` does not affect commands that do not modify the contact list
-(`help`, `list`, `find` etc.). 
+(`help`, `list`, `find` etc.).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+While it's not possible to redo (undo an undo), you can use the [command history](#command-history) feature,
+press `UP` a few times to go to the command that executes the edit,
+then press `ENTER` to execute it.
+</div>
 
 #### Exiting the program: `exit`
 
