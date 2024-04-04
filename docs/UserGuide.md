@@ -278,6 +278,12 @@ Likewise, entering `undo` with no prior changes will also display the same error
 **Note:** `undo` does not affect commands that do not modify the address book
 (`help`, `list`, `find` etc.). 
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+While it's not possible to redo (undo an undo), you can use the [command history](#command-history) feature,
+press `UP` a few times to go to the command that executes the edit,
+then press `ENTER` to execute it.
+</div>
+
 #### Exiting the program: `exit`
 
 Exits the program.
