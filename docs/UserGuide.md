@@ -77,7 +77,7 @@ Format: `help`
 For more information regarding the command formats and examples, press `F1` to open up a help window (as shown in the picture below).
 
 To close the help window, you can simply press `esc` on your keyboard. Windows users may also use 
-`alt`+`F4` or click on the red `X` in the top right corner of the window.
+`alt`+`F4` or click on the `X` in the top right corner of the window.
 
 ![help message](images/helpMessage.png)
 
