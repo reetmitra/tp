@@ -106,14 +106,14 @@ To close the help window, you can simply press `esc` on your keyboard. Windows u
 
 The [project website](https://ay2324s2-cs2103t-t11-2.github.io/tp/) includes the NUSContacts user guide, which contains a more detailed description of each command.
 
-#### Adding a person: `add`
+#### Adding a contact: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
 Format: `add n/NAME e/EMAIL r/ROLE c/COURSE [a/ADDRESS] [p/PHONE] [t/TAG]… [f/]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0).
+A contact can have any number of tags (including 0).
 </div>
 
 Examples:
@@ -143,35 +143,35 @@ This is mostly sufficient for you to know how to use the command. Here are some 
   Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
   n/ f/ Alice …` is not allowed.
 
-#### Editing a person: `edit`
+#### Editing a contact: `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]… [f/]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed address book. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
+* You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
-* You can remove a person's phone number by typing `p/` without specifying any phone number after it.
+* You can remove a contact's phone number by typing `p/` without specifying any phone number after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 p/ t/` Deletes the phone number of the 3rd person and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 p/ t/` Deletes the phone number of the 3rd contact and clears all existing tags.
 
 <div markdown="block" class="alert alert-info">
 :bulb: If an invalid field value is specified, the program will inform you of the error.
 You can fix the error, or use `f/` to bypass it if you want to.
 
-Refer to [Adding a person: `add`](#adding-a-person-add) for more information about `f/`.
+Refer to [Adding a contact: `add`](#adding-a-contact-add) for more information about `f/`.
 </div>
 
-#### Locating persons by name: `find`
+#### Locating contacts by name: `find`
 
-Finds persons whose names or course contain any of the given keywords.
+Finds contacts whose names or course contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -183,7 +183,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Han` will not match `Hans`.  
   e.g. `cs2103` will not match `CS2103T`.  
   e.g. `stu` will not match `STUDENT`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).  
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).  
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.  
   e.g. `Hans CS2103T` will return `Hans Gruber`, `Bo Yang` whose course is CS2103T.  
   e.g. `Hans TA` will return `Hans Gruber`, `Bo Yang` whose role is TA.
@@ -204,33 +204,33 @@ Examples:
 ##### Note on returning to the original view
 * After using `find`, the list may no longer display all saved contacts. Use `list` to revert the list to the full list of contacts in the order they were added.
 
-#### Listing all persons: `list`
+#### Listing all contacts: `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
 <div markdown="block" class="alert alert-info">
-:bulb: See [note](#note-on-returning-to-the-original-view) under [Locating Persons by Name](#locating-persons-by-name-find) to understand how the `list` command can be useful.
+:bulb: See [note](#note-on-returning-to-the-original-view) under [Locating Contacts by Name](#locating-contacts-by-name-find) to understand how the `list` command can be useful.
 </div>
 
 
-#### Deleting a person: `delete`
+#### Deleting a contact: `delete`
 
-Deletes the specified person(s) from the address book.
+Deletes the specified contact(s) from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed address book.
 * The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 
-You can also delete multiple people by chaining the indices using a comma.
+You can also delete multiple contacts by chaining the indices using a comma.
 
 Format: `delete INDEX1, INDEX2, INDEX3, …`
 
@@ -240,21 +240,21 @@ Format: `delete INDEX1, INDEX2, INDEX3, …`
 * Each `INDEX` must still adhere to the points listed above.
 
 Example:
-* `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth person in the address book.
+* `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth contact in the address book.
 
-#### Copying a person's email to clipboard: `copy`
+#### Copying a contact's email to clipboard: `copy`
 
-Copies the email of the specified person from the address book to the system clipboard.
+Copies the email of the specified contact from the address book to the system clipboard.
 
 Format: `copy INDEX`
 
-* Copies the email of the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Copies the email of the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed address book.
 * The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `copy 2` copies the email of the 2nd person in the address book to the clipboard.
-* `find Betsy` followed by `copy 1` copies the email of the 1st person in the results of the `find` command to the clipboard.
+* `list` followed by `copy 2` copies the email of the 2nd contact in the address book to the clipboard.
+* `find Betsy` followed by `copy 1` copies the email of the 1st contact in the results of the `find` command to the clipboard.
 
 #### Clearing all entries: `clear`
 
@@ -264,14 +264,20 @@ Format: `clear`
 
 #### Undo last command : `undo`
 
-Revert the last change to the contact list.
+Revert the last change to the address book.
 
 Since you can only undo the most recent change, entering `undo` consecutively
 will only show an error message (`No new changes has been made to the data`).
 Likewise, entering `undo` with no prior changes will also display the same error message.
 
-**Note:** `undo` does not affect commands that do not modify the contact list
+**Note:** `undo` does not affect commands that do not modify the address book
 (`help`, `list`, `find` etc.). 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+While it's not possible to redo (undo an undo), you can use the [command history](#command-history) feature,
+press `UP` a few times to go to the command that executes the edit,
+then press `ENTER` to execute it.
+</div>
 
 #### Exiting the program: `exit`
 
