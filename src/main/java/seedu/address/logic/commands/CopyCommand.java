@@ -18,7 +18,7 @@ public class CopyCommand extends Command {
 
     public static final String COMMAND_WORD = "copy";
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD
-        + ": Copies the email of the person identified by the index number used in the displayed person list.\n";
+        + ": Copies the email of the contact identified by the index number used in the displayed address book.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION
         + "Parameters: INDEX (must be a positive integer)\n"
