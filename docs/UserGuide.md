@@ -276,7 +276,21 @@ will only show an error message (`No new changes has been made to the data`).
 Likewise, entering `undo` with no prior changes will also display the same error message.
 
 **Note:** `undo` does not affect commands that do not modify the contact list
-(`help`, `list`, `find` etc.). 
+(`help`, `list`, `find` etc.).
+
+### Examples of Incorrect Inputs
+
+1. **Example 1: Empty Tag in Add Command**
+
+   If you enter the command `add n/John Doe p/12345678 e/johndoe@example.com r/Student a/PGPR c/CS2103T t/`, 
+   you will see an error message because the `t/` tag is empty. 
+   The correct command should be `add n/John Doe p/12345678 e/johndoe@example.com r/Student a/PGPR c/CS2103T t/friend`.
+
+2. **Example 2: Incorrect Usage of Copy Command**
+
+   If you want to copy the email of the first person in your contact list, you would use the command `copy 1`. 
+   If you enter `copy` without specifying the index, you will see an error message because the index is missing. 
+   The correct command should include the index of the person in the displayed contact list, like `copy 1`.
 
 #### Exiting the program: `exit`
 
