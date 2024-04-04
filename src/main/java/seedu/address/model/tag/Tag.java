@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag name cannot be empty";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names cannot be empty.";
 
     public final String tagName;
 
