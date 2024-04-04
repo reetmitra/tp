@@ -22,7 +22,6 @@ public class CopyCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
-
     private final Index targetIndex;
 
     public CopyCommand(Index targetIndex) {

@@ -47,7 +47,6 @@ public class CopyCommandTest {
         // Check if the command was successful
         assertEquals("Email copied to clipboard.", result.getFeedbackToUser());
     }
-
     @Test
     public void equals() {
         CopyCommand copyFirstCommand = new CopyCommand(Index.fromOneBased(1));

@@ -17,6 +17,7 @@ public class CopyCommandParser implements Parser<CopyCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CopyCommand parse(CommandPart args) throws ParseException {
+
         try {
             Index index = ParserUtil.parseIndex(args);
             return new CopyCommand(index);

@@ -9,7 +9,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CopyCommand;
 
 public class CopyCommandParserTest {
-
     private CopyCommandParser parser = new CopyCommandParser();
 
     @Test
