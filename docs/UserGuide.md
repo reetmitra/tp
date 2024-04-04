@@ -271,4 +271,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
 | **List**   | `list`                                                                                                                                                                          |
 | **Help**   | `help`                                                                                                                                                                          |
-| **Undo**   |`undo`                                                                                                                                                                          |
+| **Undo**   | `undo`                                                                                                                                                                          |
