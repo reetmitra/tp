@@ -185,6 +185,17 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undo last command : `undo`
+
+Revert the last change to the contact list.
+
+Since you can only undo the most recent change, entering `undo` consecutively
+will only show an error message (`No new changes has been made to the data`).
+Likewise, entering `undo` with no prior changes will also display the same error message.
+
+**Note:** `undo` does not affect commands that do not modify the contact list
+(`help`, `list`, `find` etc.). 
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -234,3 +245,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T`                                                                                                              |
 | **List**   | `list`                                                                                                                                                                          |
 | **Help**   | `help`                                                                                                                                                                          |
+| **Undo**   |`undo`                                                                                                                                                                          |
