@@ -21,7 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
@@ -30,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.exceptions.InvalidAddressException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,9 +40,11 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values.\n";
+
+    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -74,21 +77,22 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandExecutionException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandExecutionException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandExecutionException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        model.saveAddressBook(); // Save previous copy of address book if command execution successful.
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -98,20 +102,24 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandExecutionException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Optional<Phone> updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Optional<Address> updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(
-            updatedName, updatedPhone, updatedEmail, updatedRole,
-            updatedAddress, updatedCourse, updatedTags);
+        try {
+            return Person.createPerson(
+                    updatedName, updatedPhone, updatedEmail, updatedRole,
+                    updatedAddress, updatedCourse, updatedTags);
+        } catch (InvalidAddressException e) {
+            throw new CommandExecutionException(e.getMessage());
+        }
     }
 
     @Override
@@ -147,7 +155,7 @@ public class EditCommand extends Command {
         private Optional<Phone> phone;
         private Email email;
         private Role role;
-        private Address address;
+        private Optional<Address> address;
         private Course course;
         private Set<Tag> tags;
 
@@ -214,11 +222,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(role);
         }
 
-        public void setAddress(Address address) {
+        public void setAddress(Optional<Address> address) {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        /**
+         * Gets the address information of this optional.
+         * <p>
+         * The result is {@code Optional.empty()} if {@code a/} field is not specified,
+         * {@code Optional.of(Optional.empty())} if {@code a/} field is specified but left empty
+         * (which means the user wants to delete the address),
+         * and an actual value if the user wants to update the address.
+         */
+        public Optional<Optional<Address>> getAddress() {
             return Optional.ofNullable(address);
         }
 

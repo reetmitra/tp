@@ -45,6 +45,7 @@ class JsonAdaptedPerson {
             @JsonInclude(JsonInclude.Include.NON_NULL) @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("role") String role,
+            @JsonInclude(JsonInclude.Include.NON_NULL)
             @JsonProperty("address") String address,
             @JsonProperty("course") String course,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -67,8 +68,8 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().map(x -> x.value).orElse(null);
         email = source.getEmail().value;
-        role = source.getRole().role.name();
-        address = source.getAddress().value;
+        role = source.getRole().name();
+        address = source.getAddress().map(x -> x.value).orElse(null);
         course = source.getCourse().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -82,6 +83,7 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final boolean shouldCheck = false; // we allow invalid phone number formats etc.
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
@@ -94,18 +96,12 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone != null && !Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Optional<Phone> modelPhone = Optional.ofNullable(phone).map(phone -> new Phone(phone));
+        final Optional<Phone> modelPhone = Optional.ofNullable(phone).map(x -> new Phone(x, shouldCheck));
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
+        final Email modelEmail = new Email(email, shouldCheck);
 
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
@@ -113,23 +109,17 @@ class JsonAdaptedPerson {
         if (!Role.isValidRole(role)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        final Role modelRole = new Role(role);
+        final Role modelRole = Role.valueOf(role);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
+        if (address != null && !Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Optional<Address> modelAddress = Optional.ofNullable(address).map(Address::new);
 
         if (course == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
-        if (!Course.isValidCourse(course)) {
-            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
-        }
-        final Course modelCourse = new Course(course);
+        final Course modelCourse = new Course(course, shouldCheck);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

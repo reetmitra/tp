@@ -27,8 +27,6 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -48,6 +46,9 @@ public class NameTest {
         // same object -> returns true
         assertTrue(name.equals(name));
 
+        // same name different in case -> returns true
+        assertTrue(name.equals(new Name("vaLId nAme")));
+
         // null -> returns false
         assertFalse(name.equals(null));
 
@@ -56,5 +57,7 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+
+
     }
 }

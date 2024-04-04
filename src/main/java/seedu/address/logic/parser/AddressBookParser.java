@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNCLEAR_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_ARGUMENT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,12 +14,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CopyCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -27,30 +32,61 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT =
+        Pattern.compile("\\s*(?<commandWord>\\w+)(?<arguments>.*?)\\s*");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
+    /**
+     * Used to match incomplete commands with full commands.
+     */
+    private static final String[] COMMANDS = {
+        AddCommand.COMMAND_WORD,
+        EditCommand.COMMAND_WORD,
+        DeleteCommand.COMMAND_WORD,
+        ClearCommand.COMMAND_WORD,
+        FindCommand.COMMAND_WORD,
+        ListCommand.COMMAND_WORD,
+        ExitCommand.COMMAND_WORD,
+        HelpCommand.COMMAND_WORD,
+        CopyCommand.COMMAND_WORD,
+        UndoCommand.COMMAND_WORD
+    };
 
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput Full user input string.
+     * @return The command based on the user input.
+     * @throws ParseException If the user input does not conform the expected format.
      */
-    public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+    public Command parseCommand(CommandString userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.toString());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final CommandPart commandWord = new CommandPart(userInput).getSubstring(
+                matcher.start("commandWord"), matcher.end("commandWord"));
+        final CommandPart arguments = new CommandPart(userInput).getSubstring(
+                matcher.start("arguments"), matcher.end("arguments"));
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-        switch (commandWord) {
+
+        // Get a list of commands that matches the input command.
+        List<String> matchedCommands = ParserUtil.filterByPrefix(commandWord.toString(), COMMANDS);
+
+        String command = commandWord.toString();
+        if (matchedCommands.size() == 1) {
+            command = matchedCommands.get(0);
+        } else if (matchedCommands.size() > 1) {
+            // Input matches multiple commands.
+            throw new ParseException(MESSAGE_UNCLEAR_COMMAND);
+        }
+
+        switch (command) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -62,19 +98,30 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            ensureNoArgument(command, arguments);
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            ensureNoArgument(command, arguments);
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            ensureNoArgument(command, arguments);
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            ensureNoArgument(command, arguments);
             return new HelpCommand();
+
+        case CopyCommand.COMMAND_WORD:
+            return new CopyCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            ensureNoArgument(command, arguments);
+            return new UndoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
@@ -82,4 +129,15 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * Ensures that no arguments are provided for the command.
+     * @param command The command word.
+     * @param arguments The arguments provided.
+     * @throws ParseException If arguments are provided.
+     */
+    private void ensureNoArgument(String command, CommandPart arguments) throws ParseException {
+        if (!arguments.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_UNEXPECTED_ARGUMENT, command));
+        }
+    }
 }

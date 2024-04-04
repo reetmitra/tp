@@ -52,6 +52,12 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Save a copy of address book. */
+    void saveAddressBook();
+
+    /** Replaces the current addressbook with the previous one. */
+    void undoAddressBook();
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */

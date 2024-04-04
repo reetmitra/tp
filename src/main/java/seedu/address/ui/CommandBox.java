@@ -3,10 +3,14 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandExecutionException;
+import seedu.address.logic.parser.CommandString;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.CommandHistoryModel;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -17,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandHistoryModel commandHistory;
 
     @FXML
     private TextField commandTextField;
@@ -27,6 +32,8 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.commandHistory = new CommandHistoryModel();
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -36,16 +43,45 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
+        final String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
         }
 
+        final CommandString commandString = new CommandString(commandText);
         try {
-            commandExecutor.execute(commandText);
+            commandExecutor.execute(commandString);
+            commandHistory.addCommand(commandString);
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
+        } catch (CommandExecutionException | ParseException e) {
             setStyleToIndicateCommandFailure();
+            e.getErroneousPart().ifPresent(erroneousPart -> {
+                commandTextField.selectRange(erroneousPart.getStartIndex(), erroneousPart.getEndIndex());
+            });
+        }
+    }
+
+    /**
+     * Handles any key button pressed event. Currently supports only UP and DOWN keys.
+     *
+     * @param keyEvent The key pressed while command box is in focus.
+     */
+    @FXML
+    private void handleKeyPressed(KeyEvent keyEvent) {
+        final KeyCode keyCode = keyEvent.getCode();
+
+        if (keyCode == KeyCode.UP) {
+            CommandString currentCommandText = new CommandString(commandTextField.getText());
+            String text = commandHistory.getPreviousCommandHistory(currentCommandText).toString();
+
+            commandTextField.setText(text);
+            commandTextField.positionCaret(text.length()); // Set caret to be at the right-end.
+        } else if (keyCode == KeyCode.DOWN) {
+            CommandString currentCommandText = new CommandString(commandTextField.getText());
+            String text = commandHistory.getNextCommandHistory(currentCommandText).toString();
+
+            commandTextField.setText(text);
+            commandTextField.positionCaret(text.length()); // Set caret to be at the right-end.
         }
     }
 
@@ -77,9 +113,9 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String)
+         * @see seedu.address.logic.Logic#execute(CommandString)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(CommandString commandText) throws CommandExecutionException, ParseException;
     }
 
 }

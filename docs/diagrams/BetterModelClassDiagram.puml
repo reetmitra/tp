@@ -14,8 +14,12 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
 Person *--> Email
+Person *--> Name
 Person *--> Address
+Person *--> Course
+Enum "<<enumeration>>\nRole" as Role
+Person *--> Role
+Person *--> "*" Phone
+
 @enduml
