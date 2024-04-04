@@ -191,6 +191,20 @@ Format: `delete INDEX1, INDEX2, INDEX3, …​`
 Example:
 * `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth person in the address book.
 
+### Copying a person's email to clipboard: `copy`
+
+Copies the email of the specified person from the address book to the system clipboard.
+
+Format: `copy INDEX`
+
+* Copies the email of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `copy 2` copies the email of the 2nd person in the address book to the clipboard.
+* `find Betsy` followed by `copy 1` copies the email of the 1st person in the results of the `find` command to the clipboard.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
