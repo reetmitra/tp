@@ -191,11 +191,36 @@ Format: `delete INDEX1, INDEX2, INDEX3, …​`
 Example:
 * `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth person in the address book.
 
+### Copying a person's email to clipboard: `copy`
+
+Copies the email of the specified person from the address book to the system clipboard.
+
+Format: `copy INDEX`
+
+* Copies the email of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `copy 2` copies the email of the 2nd person in the address book to the clipboard.
+* `find Betsy` followed by `copy 1` copies the email of the 1st person in the results of the `find` command to the clipboard.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Undo last command : `undo`
+
+Revert the last change to the contact list.
+
+Since you can only undo the most recent change, entering `undo` consecutively
+will only show an error message (`No new changes has been made to the data`).
+Likewise, entering `undo` with no prior changes will also display the same error message.
+
+**Note:** `undo` does not affect commands that do not modify the contact list
+(`help`, `list`, `find` etc.). 
 
 ### Exiting the program : `exit`
 
@@ -246,3 +271,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
 | **List**   | `list`                                                                                                                                                                          |
 | **Help**   | `help`                                                                                                                                                                          |
+| **Undo**   |`undo`                                                                                                                                                                          |
