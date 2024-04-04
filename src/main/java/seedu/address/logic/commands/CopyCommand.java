@@ -5,6 +5,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -38,16 +39,13 @@ public class CopyCommand extends Command {
             String email = person.getEmail().value;
 
             // Copy to clipboard
-            StringSelection stringSelection = new StringSelection(email);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            clipboard.setContents(stringSelection, null);
+            copyEmail(email);
 
             return new CommandResult("Email copied to clipboard.");
-        } catch (Exception e) {
-            throw new CommandExecutionException("Error while copying email to clipboard.", e);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandExecutionException("Invalid index provided. Please provide a valid index.");
         }
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -66,5 +64,11 @@ public class CopyCommand extends Command {
         StringSelection stringSelection = new StringSelection(email);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
+    }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("targetIndex", targetIndex)
+            .toString();
     }
 }
