@@ -6,6 +6,7 @@ import java.awt.datatransfer.StringSelection;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandExecutionException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -43,7 +44,7 @@ public class CopyCommand extends Command {
 
             return new CommandResult("Email copied to clipboard.");
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandExecutionException("Invalid index provided. Please provide a valid index.");
+            throw new CommandExecutionException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
     @Override
