@@ -73,7 +73,7 @@ Furthermore, certain edits can cause the NUSContacts to behave in unexpected way
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/owes money` etc.
 
 * If the command you have typed is a prefix of only one existing command, it will be interpreted as that existing command.<br>
   e.g. if the command is `ad ...`, then it will be interpreted as an `add ...` command.
@@ -169,9 +169,9 @@ You can fix the error, or use `f/` to bypass it if you want to.
 Refer to [Adding a contact: `add`](#adding-a-contact-add) for more information about `f/`.
 </div>
 
-#### Locating contacts by name: `find`
+#### Locating contacts: `find`
 
-Finds contacts whose names or course contain any of the given keywords.
+Finds contacts whose name, course or role contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -211,7 +211,7 @@ Shows a list of all contacts in the address book.
 Format: `list`
 
 <div markdown="block" class="alert alert-info">
-:bulb: See [note](#note-on-returning-to-the-original-view) under [Locating Contacts by Name](#locating-contacts-by-name-find) to understand how the `list` command can be useful.
+:bulb: See [note](#note-on-returning-to-the-original-view) under [Locating Contacts](#locating-contacts-find) to understand how the `list` command can be useful.
 </div>
 
 
@@ -262,7 +262,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-#### Undo last command : `undo`
+#### Undoing the last command: `undo`
 
 Revert the last change to the address book.
 
@@ -355,20 +355,34 @@ For example:
 **Q**: How do I include special characters such as `/` into the name, address or tag?<br>
 **A**: Refer to ["Escape special characters" section](#escape-special-characters).
 
+**Q**: I've found a bug in the application. How can I report it?<br>
+**A**: Please check the [list of known issues/limitations](#known-issueslimitations) first. If it is not covered, you can report the bug at the [project's issue tracker on GitHub](https://github.com/AY2324S2-CS2103T-T11-2/tp/issues).
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known issues/limitations
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-2. A professor must have an address attached. This is reasonable in most cases; however, some visiting
+2. **A professor must have an address attached**. This is reasonable in most cases; however, some visiting
    instructor may not have a specific office address in NUS.
 
    Because address can be any nonempty string, you can work around this issue by typing "`none`" or similar into the address field.
    The program will not handle this input specially, however.
 
-3. Refer to [list of planned enhancements](DeveloperGuide.html#appendix-planned-enhancements) in [the developer
-   guide](DeveloperGuide.html).
+1. If any component (name, email, etc.) is too long, **it will be hidden on the screen**.
+
+8. The result display cannot be resized to view the text in case the text is long.
+
+3. The `undo` only supports undoing one command, as mentioned in [the command's
+   documentation](#undoing-the-last-command-undo).
+
+4. Using the `edit` command to edit the tag list will delete all the existing tags and replace it with the
+   new tags, as mentioned in [the command's documentation](#editing-a-contact-edit).
+
+5. There's no way to make [the `find` command](#locating-contacts-find) more targeted; for example, if there are 3 entries in the address book with name `John Doe`, `Jane Doe` and `John Smith`, then there's no way to search for specifically `John Doe`.  <!-- ] -->
+
+7. Duplicate phone number and email are not detected.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -377,13 +391,13 @@ For example:
 
 | Action     | Format, Examples                                                                                                                                                                |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME e/EMAIL r/ROLE a/ADDRESS c/COURSE [t/TAG]… [p/PHONE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                         |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
-| **List**   | `list`                                                                                                                                                                          |
-| **Help**   | `help`                                                                                                                                                                          |
-| **Exit**   | `exit`                                                                                                                                                                          |
-| **Copy**   | `copy INDEX`                                                                                                                                                                          |
-| **Undo**   | `undo`                                                                                                                                                                          |
+| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE a/ADDRESS c/COURSE [t/TAG]… [p/PHONE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
+| [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                         |
+| [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
+| [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| [**Find**](#locating-contacts-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
+| [**List**](#listing-all-contacts-list)   | `list`                                                                                                                                                                          |
+| [**Help**](#viewing-help-help)   | `help`                                                                                                                                                                          |
+| [**Exit**](#exiting-the-program-exit)   | `exit`                                                                                                                                                                          |
+| [**Copy Email**](#copying-a-contacts-email-to-clipboard-copy)   | `copy INDEX`                                                                                                                                                                          |
+| [**Undo**](#undoing-the-last-command-undo)   | `undo`                                                                                                                                                                          |
