@@ -153,9 +153,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* You can remove a person's phone number by typing `p/` without specifying any phone number after it.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+:bulb: **Tip:** You can remove a person's phone number by typing `p/` without specifying any phone number after it.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
