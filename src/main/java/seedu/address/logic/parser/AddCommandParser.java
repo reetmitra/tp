@@ -48,7 +48,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_FORCE);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+            PREFIX_ROLE, PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_FORCE);
 
         boolean shouldCheck = ParserUtil.parseShouldCheckFlag(argMultimap);
 
