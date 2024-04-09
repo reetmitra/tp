@@ -65,4 +65,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Unescapes the given {@code String} by replacing all occurrences of {@code \\} by {@code \},
+     * and all occurrences of {@code \/} by {@code /}.
+     */
+    public static String unescapeString(String str) {
+        return str.replaceAll("\\\\([\\\\/])", "$1");
+    }
 }

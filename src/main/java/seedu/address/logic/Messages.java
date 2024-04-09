@@ -15,16 +15,17 @@ import seedu.address.model.tag.Tag;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNCLEAR_COMMAND = "Unclear command";
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNCLEAR_COMMAND = "Unclear command.";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_FORCE_TAG_MUST_BE_EMPTY = "There must be no value following " + PREFIX_FORCE;
     public static final String MESSAGE_UNEXPECTED_ARGUMENT = "Invalid command format!\n"
-        + "Command '%1$s' should not take any arguments";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+        + "Command '%1$s' should not take any arguments.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX_WITH_USAGE =
-        "The person index provided is invalid\n%1$s";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+        "The contact index provided is invalid.\n%1$s";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
+        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX_WITH_USAGE, "").trim();
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d contact(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_FIX_OR_ADD_FORCE_FLAG =
