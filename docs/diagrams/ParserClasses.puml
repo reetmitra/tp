@@ -16,6 +16,8 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+Class CommandString
+Class CommandPart
 }
 
 Class HiddenOutside #FFFFFF
@@ -29,6 +31,10 @@ XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
+ArgumentTokenizer ..> CommandString
+ArgumentTokenizer .down.> CommandPart
+ParserUtil ..> CommandPart
+CommandPart .left.> CommandString
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
 XYZCommandParser ..> ParserUtil

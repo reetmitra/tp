@@ -10,14 +10,14 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name, course, or role contains any of the argument keywords.
+ * Finds and lists all people in address book whose name, course, or role contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final String COMMAND_DESCRIPTION = COMMAND_WORD
-            + ": Finds all persons whose name, course, or role contains any of "
+            + ": Finds all contacts whose name, course, or role contains any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION
