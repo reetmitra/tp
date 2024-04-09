@@ -158,9 +158,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* You can remove a person's phone number by typing `p/` without specifying any phone number after it.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+:bulb: **Tip:** You can remove a person's phone number by typing `p/` without specifying any phone number after it.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -302,15 +304,15 @@ Format: `exit`
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action     | Format, Examples                                                                                                                                                               |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME e/EMAIL r/ROLE a/ADDRESS c/COURSE [t/TAG]… [p/PHONE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                         |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
+| **Clear**  | `clear`                                                                                                                                                                        |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                            |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
-| **List**   | `list`                                                                                                                                                                          |
-| **Help**   | `help`                                                                                                                                                                          |
-| **Exit**   | `exit`                                                                                                                                                                          |
-| **Copy**   | `copy INDEX`                                                                                                                                                                          |
-| **Undo**   | `undo`                                                                                                                                                                          |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                     |
+| **List**   | `list`                                                                                                                                                                         |
+| **Help**   | `help`                                                                                                                                                                         |
+| **Exit**   | `exit`                                                                                                                                                                         |
+| **Copy**   | `copy INDEX`                                                                                                                                                                   |
+| **Undo**   | `undo`                                                                                                                                                                         |
