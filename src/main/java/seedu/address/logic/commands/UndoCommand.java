@@ -16,7 +16,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully revert the changes.";
 
-    public static final String MESSAGE_NO_PREVIOUS_STATE = "No new changes has been made to the data.";
+    public static final String MESSAGE_NO_PREVIOUS_STATE = "No new changes have been made to the data.";
 
     @Override
     public CommandResult execute(Model model) throws CommandExecutionException {
