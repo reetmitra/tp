@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-NUSContacts is a **desktop app for NUS Students to manage their academic contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
+NUSContacts is a **desktop app designed for NUS Students, offering a streamlined way to manage their academic contacts with ease.**
+Whether you're organizing peer groups, keeping track of tutors, or connecting with professors, NUSContacts centralizes the organization of contacts.
+
+Our platform combines the simplicity of a Command Line Interface (CLI) with an intuitive Graphical User Interface (GUI), providing users with the best of both worlds.
+If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
