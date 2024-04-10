@@ -126,25 +126,18 @@ Examples:
 
 This is mostly sufficient for you to know how to use the command. Here are some more details:
 
-* **The `a/ADDRESS` field**: You can keep a professor or TA's office address here.
-  However, TA or student may not have an office (and you may not know their home address),
-  as such, this field is optional for those roles.
+| Field | Description                                                                                                                                                                                                                                                                                                                      | Example                | Optional |
+|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|----------|
+| `n/NAME` | Name of the contact.                                                                                                                                                                                                                                                                                                             | `n/John Doe`           | No |
+| `e/EMAIL` | Email of the contact.                                                                                                                                                                                                                                                                                                            | `e/e0123456@u.nus.edu` | No |
+| `r/ROLE` | Role of the contact. The allowed roles are `Student`, `TA`, and `Professor`. The input is case-insensitive, and you can type an unambiguous prefix to specify the role.                                                                                                                                                          | `r/Student`, `r/s`      | No |
+| `c/COURSE` | Course of the contact.                                                                                                                                                                                                                                                                                                           | `c/CS2103T`            | No |
+| `a/ADDRESS` | Address of the contact. You may keep a professor or TA's office address here. However, TAs and students may not have an office, thus address is optional for these roles.                                                                                                                                                        | `a/PGPR`               | Yes |
+| `p/PHONE` | Phone number of the contact. Unlike the `edit` command, `p/` without any phone number is not supported. If you want to not specify the phone number, leave out `p/PHONE` entirely.                                                                                                                                               | `p/98765432`           | Yes |
+| `t/TAG` | Tags of the contact. Similarly, `t/` with an empty tag is not supported. If you want to not include any tag, leave out `t/TAG` entirely.                                                                                                                                                                                         | `t/friend`             | Yes |
+| `f/` | Bypasses validation. Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command. | `f/`                   | Yes |
 
-* **The `r/ROLE` field**: The allowed roles are `Student`, `TA`, or `Professor`.
-  The input is case-insensitive, and you can type an unambiguous prefix to specify the role.
-  For example, you can type `r/s` instead of `r/student` as shown above.
-
-* **The `t/TAG` field**: Unlike the `edit` command, `t/` with an empty tag is not supported.
-  If you want to not include any tag, leave out `t/TAG` entirely.
-
-* **The `p/PHONE` field**: Similarly, `p/` without any phone number is not supported,
-  if you want to not specify the phone number, leave out `p/PHONE` entirely.
-
-* **The `f/` field**: Several fields have some validation rules (for example, you cannot use `ABCD` as a course code,
-  since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the
-  program will allow you to bypass the validation by adding `f/` to the end of the command.
-
-  Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
+  :bulb: Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
   n/ f/ Alice …` is not allowed.
 
 #### Editing a contact: `edit`
