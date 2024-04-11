@@ -297,6 +297,11 @@ You don't need to know about these features on the first read.
 When a command contains an error, the program will try to detect the part of the command that causes the error, and
 selects it in the command box.
 
+For example:
+* If you type `peer` for the role field, the error message is shown and 
+  the text cursor is positioned at `peer` where the error occurs as the image below.<br>
+  ![result for wrong role 'peer'](images/Highlighting_erroneous_part_of_the_command.png)
+
 #### Escape special characters
 
 Naturally, because `n/` denotes the name, it is not possible to include it into part of many commands.
