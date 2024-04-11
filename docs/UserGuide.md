@@ -240,7 +240,7 @@ Format: `delete INDEX1, INDEX2, INDEX3, …`
 * The indices do not need to be listed in order. (i.e. `2, 4, 6` is the same as `6, 2, 4`)
 * Listing the same index more than once will result in an error message being displayed.
 * Each `INDEX` must still adhere to the points listed above.
-* Whitespace between indices is not important. i.e `delete 1,2,3` is the same as `delete 1, 2, 3`.
+* Whitespace between indices is not important. i.e. `delete 1,2,3` is the same as `delete 1, 2, 3`.
 
 Example:
 * `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth contact in the address book.
