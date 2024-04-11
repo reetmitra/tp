@@ -98,7 +98,7 @@ Shows a message listing out all the available commands and their purpose.
 Format: `help`
 
 For more information regarding the command formats and examples, press `F1` to open up a help window (as shown in the picture below).
-  * For some users (with newer Macs, you would have to press `fn`+`F1` to open the help window).
+  * For some users with newer Macs, use `fn`+`F1` to open the help window.
 
 To close the help window, you can simply press `esc` on your keyboard. Windows users may also use 
 `alt`+`F4` or click on the `X` in the top right corner of the window.
@@ -240,7 +240,7 @@ Format: `delete INDEX1, INDEX2, INDEX3, …`
 * The indices do not need to be listed in order. (i.e. `2, 4, 6` is the same as `6, 2, 4`)
 * Listing the same index more than once will result in an error message being displayed.
 * Each `INDEX` must still adhere to the points listed above.
-* It is upto the user to decide if they want to use `delete 1,2,3` or `delete 1, 2, 3`, both work the exact same way.
+* Whitespace between indices is not important. i.e `delete 1,2,3` is the same as `delete 1, 2, 3`.
 
 Example:
 * `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth contact in the address book.
