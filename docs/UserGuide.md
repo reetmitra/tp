@@ -153,14 +153,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
+* You can remove the information in the optional fields.
+  - You can remove a contact's address by typing `a/` without specifying any address after it.  
+    But if the contact's role is `Professor` you can't remove the address.
+  - You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
-* You can remove a contact's phone number by typing `p/` without specifying any phone number after it.
+  - You can remove a contact's phone number by typing `p/` without specifying any phone number after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 p/ t/` Deletes the phone number of the 3rd contact and clears all existing tags.
+*  `edit 3 p/ a/` Deletes the phone number and the address of the 3rd contact.
 
 <div markdown="block" class="alert alert-info">
 :bulb: If an invalid field value is specified, the program will inform you of the error.
