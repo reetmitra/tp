@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-NUSContacts is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
+NUSContacts is a **desktop app designed for NUS Students, offering a streamlined way to manage their academic contacts with ease.**
+Whether you're organizing peer groups, keeping track of tutors, or connecting with professors, NUSContacts centralizes the organization of contacts.
+
+Our platform combines the simplicity of a Command Line Interface (CLI) with an intuitive Graphical User Interface (GUI), providing users with the best of both worlds.
+If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -122,25 +126,18 @@ Examples:
 
 This is mostly sufficient for you to know how to use the command. Here are some more details:
 
-* **The `a/ADDRESS` field**: You can keep a professor or TA's office address here.
-  However, TA or student may not have an office (and you may not know their home address),
-  as such, this field is optional for those roles.
+| Field | Description                                                                                                                                                                                                                                                                                                                      | Example                | Optional |
+|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|----------|
+| `n/NAME` | Name of the contact.                                                                                                                                                                                                                                                                                                             | `n/John Doe`           | No |
+| `e/EMAIL` | Email of the contact.                                                                                                                                                                                                                                                                                                            | `e/e0123456@u.nus.edu` | No |
+| `r/ROLE` | Role of the contact. The allowed roles are `Student`, `TA`, and `Professor`. The input is case-insensitive, and you can type an unambiguous prefix to specify the role.                                                                                                                                                          | `r/Student`, `r/s`      | No |
+| `c/COURSE` | Course of the contact.                                                                                                                                                                                                                                                                                                           | `c/CS2103T`            | No |
+| `a/ADDRESS` | Address of the contact. You may keep a professor or TA's office address here. However, TAs and students may not have an office, thus address is optional for these roles.                                                                                                                                                        | `a/PGPR`               | Yes |
+| `p/PHONE` | Phone number of the contact. Unlike the `edit` command, `p/` without any phone number is not supported. If you want to not specify the phone number, leave out `p/PHONE` entirely.                                                                                                                                               | `p/98765432`           | Yes |
+| `t/TAG` | Tags of the contact. Similarly, `t/` with an empty tag is not supported. If you want to not include any tag, leave out `t/TAG` entirely.                                                                                                                                                                                         | `t/friend`             | Yes |
+| `f/` | Bypasses validation. Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command. | `f/`                   | Yes |
 
-* **The `r/ROLE` field**: The allowed roles are `Student`, `TA`, or `Professor`.
-  The input is case-insensitive, and you can type an unambiguous prefix to specify the role.
-  For example, you can type `r/s` instead of `r/student` as shown above.
-
-* **The `t/TAG` field**: Unlike the `edit` command, `t/` with an empty tag is not supported.
-  If you want to not include any tag, leave out `t/TAG` entirely.
-
-* **The `p/PHONE` field**: Similarly, `p/` without any phone number is not supported,
-  if you want to not specify the phone number, leave out `p/PHONE` entirely.
-
-* **The `f/` field**: Several fields have some validation rules (for example, you cannot use `ABCD` as a course code,
-  since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the
-  program will allow you to bypass the validation by adding `f/` to the end of the command.
-
-  Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
+  :bulb: Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
   n/ f/ Alice …` is not allowed.
 
 #### Editing a contact: `edit`
@@ -152,10 +149,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE]
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed address book. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
-* You can remove a contact's phone number by typing `p/` without specifying any phone number after it.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+:bulb: **Tip:** You can remove a person's phone number by typing `p/` without specifying any phone number after it.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
