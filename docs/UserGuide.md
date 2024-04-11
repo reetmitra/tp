@@ -390,13 +390,13 @@ For example:
 
 | Action     | Format, Examples                                                                                                                                                                |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME e/EMAIL r/ROLE a/ADDRESS c/COURSE [t/TAG]… [p/PHONE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                         |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
-| **List**   | `list`                                                                                                                                                                          |
-| **Help**   | `help`                                                                                                                                                                          |
-| **Exit**   | `exit`                                                                                                                                                                          |
-| **Copy**   | `copy INDEX`                                                                                                                                                                          |
-| **Undo**   | `undo`                                                                                                                                                                          |
+| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE a/ADDRESS c/COURSE [t/TAG]… [p/PHONE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
+| [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                         |
+| [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
+| [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| [**Find**](#locating-contacts-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
+| [**List**](#listing-all-contacts-list)   | `list`                                                                                                                                                                          |
+| [**Help**](#viewing-help-help)   | `help`                                                                                                                                                                          |
+| [**Exit**](#exiting-the-program-exit)   | `exit`                                                                                                                                                                          |
+| [**Copy Email**](#copying-a-contacts-email-to-clipboard-copy)   | `copy INDEX`                                                                                                                                                                          |
+| [**Undo**](#undoing-the-last-command-undo)   | `undo`                                                                                                                                                                          |
