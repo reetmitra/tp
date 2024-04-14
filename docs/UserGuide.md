@@ -141,9 +141,11 @@ This is mostly sufficient for you to know how to use the command. Here are some 
   since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the
   program will allow you to bypass the validation by adding `f/` to the end of the command.
 
+<div markdown="span" class="alert alert-primary">
 :bulb: Note that `f/` must come at the end, or immediately before a tag. <br>
 For example, `add f/ n/Alice e/alice@gmail.com r/STUDENT c/CS2103T` is allowed, 
 but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com`is not allowed.
+</div>
 
 #### Editing a contact: `edit`
 
@@ -392,15 +394,15 @@ For example:
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                          |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE c/COURSE [a/ ADDRESS] [p/PHONE] [t/TAG]…[f/]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
-| [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                   |
-| [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                       |
-| [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                   |
-| [**Find**](#locating-contacts-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                |
-| [**List**](#listing-all-contacts-list)   | `list`                                                                                                                                                                    |
-| [**Help**](#viewing-help-help)   | `help`                                                                                                                                                                    |
-| [**Exit**](#exiting-the-program-exit)   | `exit`                                                                                                                                                                    |
-| [**Copy Email**](#copying-a-contacts-email-to-clipboard-copy)   | `copy INDEX`                                                                                                                                                              |
-| [**Undo**](#undoing-the-last-command-undo)   | `undo`                                                                                                                                                                    |
+| Action     | Format, Examples                                                                                                                                                         |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE c/COURSE [a/ADDRESS] [p/PHONE] [t/TAG]…[f/]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
+| [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                  |
+| [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
+| [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                  |
+| [**Find**](#locating-contacts-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                               |
+| [**List**](#listing-all-contacts-list)   | `list`                                                                                                                                                                   |
+| [**Help**](#viewing-help-help)   | `help`                                                                                                                                                                   |
+| [**Exit**](#exiting-the-program-exit)   | `exit`                                                                                                                                                                   |
+| [**Copy Email**](#copying-a-contacts-email-to-clipboard-copy)   | `copy INDEX`                                                                                                                                                             |
+| [**Undo**](#undoing-the-last-command-undo)   | `undo`                                                                                                                                                                   |
