@@ -139,7 +139,7 @@ This is mostly sufficient for you to know how to use the command. Here are some 
 
 <div markdown="block" class="alert alert-info">
   :bulb: Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
-  n/ f/ Alice …` is not allowed.
+  n/ f/ Alice …` is not allowed. Also, one `f/` bypasses all invalid field value errors. For example, `add f/ n/Alice e/ c/` bypasses to have empty email and course.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**

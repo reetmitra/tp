@@ -433,6 +433,8 @@ Team size: 5
    We plan to implement a way to allow user have an empty address for `Professor` by using `f/`.
 8. Currently, error messages for special cases like `delete 0`, `delete 1,1,1` are not correct. 
    We plan to implement to have correct error messages. 
+9. Currently, `f/` bypasses all invalid field value errors, not one of the errors. 
+   We plan to implement a way to bypass one by one.
 
 ## **Appendix: Instructions for manual testing**
 
