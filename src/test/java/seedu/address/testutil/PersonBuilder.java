@@ -85,10 +85,26 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Address} of the {@code Person} that we are building empty.
+     */
+    public PersonBuilder setAddressEmpty() {
+        this.address = Optional.empty();
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
         this.phone = Optional.of(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code Person} that we are building empty.
+     */
+    public PersonBuilder setPhoneEmpty() {
+        this.phone = Optional.empty();
         return this;
     }
 
