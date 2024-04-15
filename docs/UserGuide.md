@@ -432,13 +432,19 @@ You should not need to read this, unless you run into some trouble.
 
 ### Detail: Bypassing validation
 
-Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command.
+Several fields have some validation rules (for example, you cannot have email address with parentheses as there are no emails with parentheses).
+However, sometimes you might want to have the input that doesn't strictly adhere to these rules. For example, you may want to input both official and personal email addresses for a single person in an email field, like `E11111111@u.nus.com(school), helloworld@gmail.com(personal)`.
+To accommodate such cases, the program allows users to bypass the validation rules by appending `f/` to the end of their input. So, if you wanted to change 7th person's email address to the above email addresses despite the parentheses, you could do so by `edit 7 e/E11111111@u.nus.com(school), helloworld@gmail.com(personal) f/`.
 
 Some validation rules cannot be bypassed, however. If an error can be bypassed, the program will instruct you how to
 bypass it (by appending `f/` at the end of the command).
 
 Note that `f/` must come at the end, or immediately before a tag.
 For example, `add f/ n/Alice e/alice@gmail.com r/STUDENT c/CS2103T` is allowed, but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com` is not allowed.
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Term: Escaped string
 
@@ -456,6 +462,10 @@ Equivalently, a valid escaped string is a sequence of zero or more of the follow
 For example, `a\\b` is a valid escaped string that would result from escaping the string `a\b`. However, `a\x41b` would
 be an invalid escaped string.
 
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Term: Unambiguous prefix
 
 In several places in the program, you can type a prefix of the string to abbreviate the string.
@@ -472,6 +482,8 @@ is a prefix of two distinct commands.
 
 Similarly, a prefix for a role is unambiguous if there is exactly one role that it is a prefix of.
 Because currently there are only 3 roles (Student, Professor, TA), there is no ambiguous prefix for roles.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
