@@ -459,6 +459,32 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
+### Adding contacts
+
+1. Adding a contact while all contacts are being shown
+
+   Prerequisites: All existing contacts are to be cleared using `clear` command. This is to ensure no clashing of contact names while testing.
+
+   1. Test case: `add n/Joe Bama e/e0123456@u.nus.edu r/STUDENT c/CS2103T a/In the walls p/91234567`<br>
+      Expected: New contact with the specified descriptions added to the list and shown in the application.
+
+   1. Test case: `add n/Donald Frump e/spammail@gmail.com r/TA c/CS2101`<br>
+      Expected: Similar to previous, except the "phone" and "address" fields now show `(no phone number)` and `(no address)` respectively.
+   
+   1. Test case: `add n/Hilarious Blipton e/e6969420@u.nus.edu c/DSA1101`<br>
+      Expected: Contact is not added. Error details shown in the status message.
+
+   1. Test case: `add n/Hilarious Blipton e/FAKEEMAIL r/STUDENT c/DSA1101`<br>
+      Expected: Similar to previous.
+
+   1. Test case: `add n/Joe Bama e/e0123456@u.nus.edu r/STUDENT c/CS2103T a/In the walls p/91234567`<br>
+      Expected: Similar to previous. (This test must be done after the first test case)
+   
+   1. Test case: `add n/Hilarious Blipton n/Not Elden Clinton e/e6969420@u.nus.edu r/STUDENT c/DSA1101`<br>
+      Expected: Similar to previous.
+
+   1. Other incorrect add commands to try: `add`, `adding ...`, `...`.<br>
+      Expected: Similar to previous.
 
 ### Deleting contacts
 
