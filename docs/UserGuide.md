@@ -9,7 +9,8 @@ Whether you're organizing peer groups, keeping track of tutors, or connecting wi
 Our platform combines the simplicity of a Command Line Interface (CLI) with an intuitive Graphical User Interface (GUI), providing users with the best of both worlds.
 If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 * Table of Contents
@@ -46,7 +47,7 @@ If you can type fast, NUSContacts can get your contact management tasks done fas
 
 [Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -77,13 +78,11 @@ Furthermore, certain edits can cause the NUSContacts to behave in unexpected way
 
 [Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### List of all commands
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+<div markdown="block" class="alert alert-info"> **:information_source: Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -112,9 +111,6 @@ Furthermore, certain edits can cause the NUSContacts to behave in unexpected way
   characters.
 </div>
 
-[Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
 
 #### Viewing help: `help`
 
@@ -135,6 +131,8 @@ The [project website](https://ay2324s2-cs2103t-t11-2.github.io/tp/) includes the
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 #### Adding a contact: `add`
 
@@ -164,7 +162,7 @@ This is mostly sufficient for you to know how to use the command. Here are some 
 | `f/` | Bypasses validation. The program will inform you if you violate a validation rule, and how to bypass it. More details in [technical details section](#detail-bypassing-validation).  | `f/`                   | Yes |
 
 
-<div markdown="span" class="alert alert-warning">:exclamation:
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
   One `f/` bypasses all invalid field value errors.
   For example, `add f/ n/Alice e/ c/` bypasses to have empty email and course.
 </div>
@@ -201,8 +199,8 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 p/ a/` Deletes the phone number and the address of the 3rd contact.
 
-<div markdown="block" class="alert alert-info">
-:bulb: If an invalid field value is specified, the program will inform you of the error.
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+If an invalid field value is specified, the program will inform you of the error.
 You can fix the error, or use `f/` to bypass it if you want to.
 
 Refer to [Adding a contact: `add`](#adding-a-contact-add) for more information about `f/`.
@@ -258,8 +256,8 @@ Shows a list of all contacts in the address book.
 
 Format: `list`
 
-<div markdown="block" class="alert alert-info">
-:bulb: See [note](#note-on-returning-to-the-original-view) under [Locating Contacts](#locating-contacts-find) to understand how the `list` command can be useful.
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
+See [note](#note-on-returning-to-the-original-view) under [Locating Contacts](#locating-contacts-find) to understand how the `list` command can be useful.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
@@ -357,7 +355,7 @@ Format: `exit`
 
 You don't need to know about these features on the first read.
 
-#### Highlighting erroneous part of the command
+#### Highlight erroneous part of the command
 
 When a command contains an error, the program will try to detect the part of the command that causes the error, and
 selects it in the command box.
@@ -425,6 +423,8 @@ For example:
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Technical details
 
@@ -535,6 +535,8 @@ Because currently there are only 3 roles (Student, Professor, TA), there is no a
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 

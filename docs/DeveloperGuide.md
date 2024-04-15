@@ -59,7 +59,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 The description is a high-level description and is not exactly accurate, for example,
 the `execute()` method in fact takes in a `CommandString` object that represents a command string,
-instead of a literal string.
+instead of a literal string. Refer to [the implementation detail of "highlight error" feature](#implementation-1) for
+more details.
 </div>
 
 Each of the four main components (also shown in the diagram above),
@@ -105,6 +106,13 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+The description is a high-level description and is not exactly accurate, for example,
+the `execute()` method in fact takes in a `CommandString` object that represents a command string,
+instead of a literal string. Refer to [the implementation detail of "highlight error" feature](#implementation-1) for
+more details.
+</div>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -127,10 +135,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="380" />
 
 
 The `Model` component,
@@ -140,7 +150,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -272,14 +284,23 @@ For backwards compatibility, not all `CommandException` object need to know what
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                                   |
-|----------|--------------------------------------------|----------------------------------|-----------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions           | refer to instructions when I forget how to use the App                            |
-| `* * *`  | user                                       | add a new tutor                  |                                                                                   |
-| `* * *`  | user                                       | delete a tutor                   | remove entries that I no longer need                                              |
-| `* * *`  | user                                       | find a tutor by name             | locate details of tutors without having to go through the entire list             |
-| `* * *`  | user                                       | find a tutor by course code      | locate tutors from a specific course without having to go through the entire list |
-| `* *`    | user                                       | edit a tutor                     | change incorrect or new information about a tutor                                 |
+| Priority | As a …​                                    | I want to …​                                                                       | So that I can…​                                                                   |
+|-----|--------------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *` | new user                                   | see usage instructions                                                             | refer to instructions when I forget how to use the App                            |
+| `* * *` | user                                       | add a new contact                                                                  |                                                                                   |
+| `* * *` | user                                       | delete a contact                                                                   | remove entries that I no longer need                                              |
+| `* * *` | user                                       | edit a contact                                                                     | change incorrect or new information about a contact                                 |
+| `* * *` | user                                       | find a contact by name                                                             | locate details of contact without having to go through the entire list             |
+| `* * *` | user                                       | find a contact by course code                                                      | locate contact from a specific course without having to go through the entire list |
+| `*` | user                                       | find a contact by tag                                                              | find contacts with similar roles quickly  |
+| `* * *` | user                                       | list all contacts                                                                  | see all contacts at a glance                                                      |
+| `* *` | user                                       | undo the previous command                                                          | revert the previous action                                                        |
+| `* *` | user                                       | redo the previous command                                                          | redo the previous action                                                          |
+| `* *` | user                                       | tag contacts with custom labels                                                    | easily identify their roles in my academic life                                       |
+| `* *` | user                                       | press [↑] to fill the command-line box with previous commands from command history | edit the last-typed erroneous command quickly  |
+| `*` | user                                       | share a contact with my classmates                                                 | collaborate more easily on group assignments  |
+| `*` | user                                       | set reminders to contact instructors before important deadlines                    | ensure timely communication  |
+| `*` | user                                       | rate and review my interactions with instructors                                   | keep track of my personal experiences and preferences  |
 
 ### Use cases
 
