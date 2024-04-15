@@ -144,7 +144,7 @@ This is mostly sufficient for you to know how to use the command. Here are some 
 <div markdown="span" class="alert alert-primary">
 :bulb: Note that `f/` must come at the end, or immediately before a tag. <br>
 For example, `add f/ n/Alice e/alice@gmail.com r/STUDENT c/CS2103T` is allowed, 
-but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com`is not allowed.
+but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com` is not allowed.
 </div>
 
 #### Editing a contact: `edit`
