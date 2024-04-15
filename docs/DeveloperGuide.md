@@ -59,7 +59,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 The description is a high-level description and is not exactly accurate, for example,
 the `execute()` method in fact takes in a `CommandString` object that represents a command string,
-instead of a literal string.
+instead of a literal string. Refer to [the implementation detail of "highlight error" feature](#implementation-1) for
+more details.
 </div>
 
 Each of the four main components (also shown in the diagram above),
@@ -105,6 +106,13 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+The description is a high-level description and is not exactly accurate, for example,
+the `execute()` method in fact takes in a `CommandString` object that represents a command string,
+instead of a literal string. Refer to [the implementation detail of "highlight error" feature](#implementation-1) for
+more details.
+</div>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -127,10 +135,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="380" />
 
 
 The `Model` component,
@@ -140,7 +150,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
