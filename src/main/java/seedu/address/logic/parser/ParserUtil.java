@@ -29,8 +29,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_DUPLICATE_INDEX = "There is a duplicate Index listed.";
-    public static final String MESSAGE_ROLE_CONSTRAINTS =
-            "Roles should be either 'STUDENT', 'TA', or 'PROFESSOR', or an unambiguous prefix of it.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -216,7 +214,7 @@ public class ParserUtil {
         if (matchedRoles.size() == 1) {
             return Role.valueOf(matchedRoles.get(0));
         } else {
-            throw new ParseException(MESSAGE_ROLE_CONSTRAINTS, trimmedRole);
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS, trimmedRole);
         }
     }
 

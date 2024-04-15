@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_FIX_OR_ADD_FORCE_FLAG;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -47,6 +48,8 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CHARLIE;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +66,6 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
-    @Disabled
     @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
@@ -166,13 +168,25 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COURSE));
     }
 
-    @Disabled
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+        Person expectedPersonWithNoTag = new PersonBuilder(BOB).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
+                           + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ROLE_DESC_BOB + COURSE_DESC_BOB,
+                new AddCommand(expectedPersonWithNoTag));
+
+        // zero address
+        Person expectedPersonWithNoAddress = new PersonBuilder(BOB).setAddressEmpty().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ROLE_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_CLASSMATE,
+                new AddCommand(expectedPersonWithNoAddress));
+
+        // zero phone
+        Person expectedPersonWithNoPhone = new PersonBuilder(BOB).setPhoneEmpty().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + EMAIL_DESC_BOB
+                         + ADDRESS_DESC_BOB + ROLE_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_CLASSMATE,
+                new AddCommand(expectedPersonWithNoPhone));
     }
 
     @Test
@@ -215,22 +229,23 @@ public class AddCommandParserTest {
                 expectedMessage);
     }
 
-    @Disabled
     @Test
     public void parse_invalidValue_failure() {
         // invalid phone
+        String phoneErrorMessage = String.format(MESSAGE_FIX_OR_ADD_FORCE_FLAG, Phone.MESSAGE_CONSTRAINTS);
         assertParseFailure(
                 parser,
                 NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ROLE_DESC_BOB
                 + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_CLASSMATE + TAG_DESC_FRIEND,
-                Phone.MESSAGE_CONSTRAINTS);
+                phoneErrorMessage);
 
         // invalid email
+        String emailErrorMessage = String.format(MESSAGE_FIX_OR_ADD_FORCE_FLAG, Email.MESSAGE_CONSTRAINTS);
         assertParseFailure(
                 parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ROLE_DESC_BOB
                 + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_CLASSMATE + TAG_DESC_FRIEND,
-                Email.MESSAGE_CONSTRAINTS);
+                emailErrorMessage);
 
         // invalid role
         assertParseFailure(
@@ -247,11 +262,12 @@ public class AddCommandParserTest {
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid course
+        String courseErrorMessage = String.format(MESSAGE_FIX_OR_ADD_FORCE_FLAG, Course.MESSAGE_CONSTRAINTS);
         assertParseFailure(
                 parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_BOB
                 + ADDRESS_DESC_BOB + INVALID_COURSE_DESC + TAG_DESC_CLASSMATE + TAG_DESC_FRIEND,
-                Course.MESSAGE_CONSTRAINTS);
+                courseErrorMessage);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -274,7 +290,6 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_EMPTY + COURSE_DESC_BOB, Address.MESSAGE_CONSTRAINTS);
     }
 
-    @Disabled
     @Test
     public void parse_address_success() {
         // role is professor, address is provided
@@ -290,6 +305,6 @@ public class AddCommandParserTest {
         // role is not professor, address is not provided
         assertParseSuccess(parser, NAME_DESC_CHARLIE + PHONE_DESC_CHARLIE + EMAIL_DESC_CHARLIE
                         + ROLE_DESC_CHARLIE + COURSE_DESC_CHARLIE + TAG_DESC_FRIEND,
-                new AddCommand(new PersonBuilder(CHARLIE).build()));
+                new AddCommand(new PersonBuilder(CHARLIE).setAddressEmpty().build()));
     }
 }
