@@ -10,9 +10,9 @@ Our platform combines the simplicity of a Command Line Interface (CLI) with an i
 If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Table of Contents
 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
