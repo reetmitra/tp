@@ -49,7 +49,7 @@ If you can type fast, NUSContacts can get your contact management tasks done fas
 
 #### Command history
 
-You can navigate between past successful commands by pressing the `UP` and `DOWN` arrow keys.
+You can navigate between past successful commands and the current command by pressing the `UP` and `DOWN` arrow keys.
 
 #### Saving the data
 
@@ -58,6 +58,8 @@ NUSContacts data are saved in the hard disk automatically after any command that
 #### Editing the data file
 
 NUSContacts data are saved automatically as a JSON file `[JAR file location]/data/nuscontacts.json`. Advanced users are welcome to update data directly by editing that data file.
+
+You should only modify the data file when the program is closed, otherwise there is a risk of data loss as the program may not detect the changes.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, NUSContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -79,8 +81,10 @@ Furthermore, certain edits can cause the NUSContacts to behave in unexpected way
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/owes money` etc.
 
-* If the command you have typed is a prefix of only one existing command, it will be interpreted as that existing command.<br>
-  e.g. if the command is `ad ...`, then it will be interpreted as an `add ...` command.
+  A standalone `…` has its usual meaning ("and so on"), to be interpreted depending on the surrounding context.
+
+* If the command you have typed is an [unambiguous prefix](#term-unambiguous-prefix) of only one existing command, it will be interpreted as that existing command.<br>
+  e.g. if the command is `ad …`, then it will be interpreted as an `add …` command.
 
 * Parameters can be in any order, except specified otherwise.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
@@ -102,7 +106,7 @@ Shows a message listing out all the available commands and their purpose.
 Format: `help`
 
 For more information regarding the command formats and examples, press `F1` to open up a help window (as shown in the picture below).
-  * For some users with newer Macs, use `fn`+`F1` to open the help window.
+Depends on your keyboard model, you might have to press other keyboard combinations, such as `Fn+F1`, to trigger `F1`.
 
 To close the help window, you can simply press `esc` on your keyboard. Windows users may also use 
 `alt`+`F4` or click on the `X` in the top right corner of the window.
@@ -131,17 +135,17 @@ This is mostly sufficient for you to know how to use the command. Here are some 
 |-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|----------|
 | `n/NAME` | Name of the contact.                                                                                                                                                                                                                                                                                                             | `n/John Doe`           | No |
 | `e/EMAIL` | Email of the contact.                                                                                                                                                                                                                                                                                                            | `e/e0123456@u.nus.edu` | No |
-| `r/ROLE` | Role of the contact. The allowed roles are `Student`, `TA`, and `Professor`. The input is case-insensitive, and you can type an unambiguous prefix to specify the role.                                                                                                                                                          | `r/Student`, `r/s`      | No |
+| `r/ROLE` | Role of the contact. The allowed roles are `Student`, `TA`, and `Professor`. The input is case-insensitive, and you can type an [unambiguous prefix](#term-unambiguous-prefix) to specify the role.                                                                                                                                                          | `r/Student`, `r/s`      | No |
 | `c/COURSE` | Course of the contact.                                                                                                                                                                                                                                                                                                           | `c/CS2103T`            | No |
 | `a/ADDRESS` | Address of the contact. You may keep a professor or TA's office address here. However, TAs and students may not have an office, thus address is optional for these roles.                                                                                                                                                        | `a/PGPR`               | Yes |
 | `p/PHONE` | Phone number of the contact. Unlike the `edit` command, `p/` without any phone number is not supported. If you want to not specify the phone number, leave out `p/PHONE` entirely.                                                                                                                                               | `p/98765432`           | Yes |
-| `t/TAG` | Tags of the contact. Similarly, `t/` with an empty tag is not supported. If you want to not include any tag, leave out `t/TAG` entirely.                                                                                                                                                                                         | `t/friend`             | Yes |
-| `f/` | Bypasses validation. Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command. | `f/`                   | Yes |
+| `t/TAG` | Tags of the contact. The tag must not be empty. For the `add` command, if you want to not include any tag, leave out `t/TAG` entirely.                                                                                                                                                                                         | `t/friend`             | Yes |
+| `f/` | Bypasses validation. The program will inform you if you violate a validation rule, and how to bypass it. More details in [technical details section](#detail-bypassing-validation).  | `f/`                   | Yes |
 
-<div markdown="block" class="alert alert-info">
-  :bulb: Note that `f/` must come at the end, or immediately before a tag. <br>
-  For example, `add f/ n/Alice e/alice@gmail.com r/STUDENT c/CS2103T` is allowed, but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com` is not allowed. 
-  Also, one `f/` bypasses all invalid field value errors. For example, `add f/ n/Alice e/ c/` bypasses to have empty email and course.
+
+<div markdown="span" class="alert alert-warning">:exclamation:
+  One `f/` bypasses all invalid field value errors.
+  For example, `add f/ n/Alice e/ c/` bypasses to have empty email and course.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -212,6 +216,7 @@ Examples:
     ![result for 'find alex david'](images/findYangProfessorResult.png)
 
 ##### Note on returning to the original view
+{:.no_toc}
 * After using `find`, the list may no longer display all saved contacts. Use `list` to revert the list to the full list of contacts in the order they were added.
 
 #### Listing all contacts: `list`
@@ -244,7 +249,7 @@ You can also delete multiple contacts by chaining the indices using a comma.
 
 Format: `delete INDEX1, INDEX2, INDEX3, …`
 
-* A comma (`,`) must be used to separate each pair of Indices.
+* A comma (`,`) must be used to separate each pair of indices.
 * The indices do not need to be listed in order. (i.e. `2, 4, 6` is the same as `6, 2, 4`)
 * Listing the same index more than once will result in an error message being displayed.
 * Each `INDEX` must still adhere to the points listed above.
@@ -347,7 +352,7 @@ For example:
     | `a\/b` | `a\\\/b` |
     | `a\\b` | `a\\\\b` |
 
-* You should not enter invalid escape sequences, but if you do, the program will make a guess on what you mean.
+* You should not enter [invalid escape sequences](#term-escaped-string), but if you do, the program will make a guess on what you mean.
 
     | If you type | The program will guess you wanted to type |
     |--|--|
@@ -360,6 +365,55 @@ For example:
     `John s/o Doe`.
   * `find John s\/o Doe` will be able to find that person.
   * `edit 2 t/birthday: 3\/2` will edit the tag list of the 2nd person to have a single tag `birthday: 3/2`.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Technical details
+
+You should not need to read this, unless you run into some trouble.
+
+### Detail: Bypassing validation
+
+Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command.
+
+Some validation rules cannot be bypassed, however. If an error can be bypassed, the program will instruct you how to
+bypass it (by appending `f/` at the end of the command).
+
+Note that `f/` must come at the end, or immediately before a tag.
+For example, `add f/ n/Alice e/alice@gmail.com r/STUDENT c/CS2103T` is allowed, but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com` is not allowed.
+
+### Term: Escaped string
+
+In the "[Escape special characters](#escape-special-characters)" feature, sometimes it's needed to *escape* a string in
+order to enter it into the program.
+
+Given a string `s`, **in order to escape it, the following procedure should be followed**:
+For each character of `s`, if it is `/` or `\`, prepend a backslash `\` before it.
+
+A valid **escaped string** is a string that is a possible result from applying the procedure above.
+Equivalently, a valid escaped string is a sequence of zero or more of the following:
+* Any character that is neither `/` nor `\`,
+* The string `\/` or `\\`.
+
+For example, `a\\b` is a valid escaped string that would result from escaping the string `a\b`. However, `a\x41b` would
+be an invalid escaped string.
+
+### Term: Unambiguous prefix
+
+In several places in the program, you can type a prefix of the string to abbreviate the string.
+
+For example, you can type `a` to abbreviate [the `add` command](#adding-a-contact-add).
+
+A string `s` is a **prefix** of another string `t` if `s` can be obtained by removing zero or more characters at the end
+of `t`. For example, "ab" is a prefix of "abcd", but it's not a prefix of "acbd".
+
+A prefix for a command is **unambiguous** if there is exactly one command that it is a prefix of,
+and a prefix is **ambiguous** if there are at least two commands it is a prefix of.
+For example, since there are two commands `edit` and `exit`, the string "e" would be an **ambiguous** prefix, since it
+is a prefix of two distinct commands.
+
+Similarly, a prefix for a role is unambiguous if there is exactly one role that it is a prefix of.
+Because currently there are only 3 roles (Student, Professor, TA), there is no ambiguous prefix for roles.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -407,7 +461,7 @@ For example:
 
 | Action     | Format, Examples                                                                                                                                                         |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE c/COURSE [a/ADDRESS] [p/PHONE] [t/TAG]…[f/]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
+| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE c/COURSE [a/ADDRESS] [p/PHONE] [t/TAG]… [f/]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
 | [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                  |
 | [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
 | [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                  |
