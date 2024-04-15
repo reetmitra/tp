@@ -12,7 +12,7 @@ public enum Role {
     PROFESSOR;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Roles should be either 'STUDENT', 'TA', or 'PROFESSOR'.";;
+            "Roles should be either 'STUDENT', 'TA', or 'PROFESSOR'.";
 
     /**
      * Returns an array of strings containing all roles.
