@@ -272,14 +272,23 @@ For backwards compatibility, not all `CommandException` object need to know what
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                                   |
-|----------|--------------------------------------------|----------------------------------|-----------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions           | refer to instructions when I forget how to use the App                            |
-| `* * *`  | user                                       | add a new tutor                  |                                                                                   |
-| `* * *`  | user                                       | delete a tutor                   | remove entries that I no longer need                                              |
-| `* * *`  | user                                       | find a tutor by name             | locate details of tutors without having to go through the entire list             |
-| `* * *`  | user                                       | find a tutor by course code      | locate tutors from a specific course without having to go through the entire list |
-| `* *`    | user                                       | edit a tutor                     | change incorrect or new information about a tutor                                 |
+| Priority | As a …​                                    | I want to …​                                                                       | So that I can…​                                                                   |
+|-----|--------------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *` | new user                                   | see usage instructions                                                             | refer to instructions when I forget how to use the App                            |
+| `* * *` | user                                       | add a new contact                                                                  |                                                                                   |
+| `* * *` | user                                       | delete a contact                                                                   | remove entries that I no longer need                                              |
+| `* * *` | user                                       | edit a contact                                                                     | change incorrect or new information about a contact                                 |
+| `* * *` | user                                       | find a contact by name                                                             | locate details of contact without having to go through the entire list             |
+| `* * *` | user                                       | find a contact by course code                                                      | locate contact from a specific course without having to go through the entire list |
+| `*` | user                                       | find a contact by tag                                                              | find contacts with similar roles quickly  |
+| `* * *` | user                                       | list all contacts                                                                  | see all contacts at a glance                                                      |
+| `* *` | user                                       | undo the previous command                                                          | revert the previous action                                                        |
+| `* *` | user                                       | redo the previous command                                                          | redo the previous action                                                          |
+| `* *` | user                                       | tag contacts with custom labels                                                    | easily identify their roles in my academic life                                       |
+| `* *` | user                                       | press [↑] to fill the command-line box with previous commands from command history | edit the last-typed erroneous command quickly  |
+| `*` | user                                       | share a contact with my classmates                                                 | collaborate more easily on group assignments  |
+| `*` | user                                       | set reminders to contact instructors before important deadlines                    | ensure timely communication  |
+| `*` | user                                       | rate and review my interactions with instructors                                   | keep track of my personal experiences and preferences  |
 
 ### Use cases
 
