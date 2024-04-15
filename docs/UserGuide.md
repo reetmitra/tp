@@ -137,8 +137,15 @@ This is mostly sufficient for you to know how to use the command. Here are some 
 | `t/TAG` | Tags of the contact. Similarly, `t/` with an empty tag is not supported. If you want to not include any tag, leave out `t/TAG` entirely.                                                                                                                                                                                         | `t/friend`             | Yes |
 | `f/` | Bypasses validation. Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command. | `f/`                   | Yes |
 
+<div markdown="block" class="alert alert-info">
   :bulb: Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
   n/ f/ Alice …` is not allowed.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you want to add people with same name, you can add additional characters to add and differentiate them.
+For example, you can add two Alice by `n/Alice1` and `n/Alice2`.
+</div>
 
 #### Editing a contact: `edit`
 
