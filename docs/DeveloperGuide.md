@@ -306,31 +306,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `NUSContacts` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC1: Add a tutor**
+**UC1: Add a contact**
 
 **MSS**
 
-1.  User requests to add a tutor
-2.  User provides the tutor's details
-3.  NUSContacts adds the tutor
+1.  User requests to add a contact
+2.  User provides the contact's details
+3.  NUSContacts adds the contact
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The tutor already exists.
+* 2a. The contact already exists.
     * 2a1. NUSContacts informs the user of the error.
 
       Use case ends.
 
-**UC2: Delete a tutor**
+**UC2: Delete a contact**
 
 **MSS**
 
 1.  User requests to list tutors
 2.  NUSContacts shows a list of tutors
-3.  User requests to delete a specific tutor in the list
-4.  NUSContacts deletes the tutor
+3.  User requests to delete a specific contact in the list
+4.  NUSContacts deletes the contact
 
     Use case ends.
 
@@ -346,25 +346,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**UC3: Edit a tutor**
+**UC3: Edit a contact**
 
 **MSS**
 
-1. User requests to edit a tutor
+1. User requests to edit a contact
 2. User provides the field to edit and the new value
-3. NUSContacts edits the tutor
+3. NUSContacts edits the contact
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User provides an empty address for a PROFESSOR. 
+* 2a. User provides an empty address for a PROFESSOR.
     * 2a1. NUSContacts shows an error message.
-      
+
       Use case resumes at step 2.
-* 2b. User gives a tutor without an address the PROFESSOR role.
+* 2b. User gives a contact without an address the PROFESSOR role.
     * 2b1. NUSContacts shows an error message.
-    
+
       Use case resumes at step 2.
 
 * 2c. User provides an invalid index such as -1.
@@ -379,39 +379,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 3.
 
 
-**UC4: Find a tutor by name**
+**UC4: Find a contact by name**
 
 **MSS**
 
-1.  User requests to find a tutor
+1.  User requests to find a contact
 2.  NUSContacts prompts search criterion (name or course code)
 3.  User provides the search criterion (name)
-4.  NUSContacts shows the tutor(s) that match the criterion
+4.  NUSContacts shows the contact(s) that match the criterion
 
     Use case ends.
 
 **Extensions**
 
-* 4a. No tutor matches the criterion.
+* 4a. No contact matches the criterion.
     * 4a1. NUSContacts informs the user of the error.
 
       Use case ends.
 
-**UC5: Find a tutor by course code**
+**UC5: Find a contact by course code**
 
 **MSS**
 
-1.  User requests to find a tutor
+1.  User requests to find a contact
 2.  NUSContacts prompts search criterion (name or course code)
 3.  User provides the search criterion (course code)
-4.  NUSContacts shows the tutor(s) that match the criterion
+4.  NUSContacts shows the contact(s) that match the criterion
 
     Use case ends.
 
 **Extensions**
 
-* 4a. No tutor matches the criterion.
+* 4a. No contact matches the criterion.
     * 4a1. NUSContacts informs the user of the error.
+
+      Use case ends.
+
+**UC5: Clear all contacts**
+
+**MSS**
+
+1.  User requests to clear all contacts
+3.  NUSContacts clears all contacts
+
+    Use case ends.
+
+**UC6: Clear all contacts**
+
+**MSS**
+
+1.  User requests to clear all contacts
+3.  NUSContacts clears all contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact already exists.
+    * 2a1. NUSContacts informs the user of the error.
 
       Use case ends.
 
