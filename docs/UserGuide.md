@@ -19,7 +19,7 @@ If you can type fast, NUSContacts can get your contact management tasks done fas
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. (Refer to [FAQ](#faq) on how to check your Java version and how to install it)
 
 2. Download the latest `NUSContacts.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-2/tp/releases).
 
@@ -488,6 +488,12 @@ Because currently there are only 3 roles (Student, Professor, TA), there is no a
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+**Q**: How do I know if I have Java 11?<br>
+**A**: Open your command terminal and enter `java --version`. The first line displayed should show `java` immediately followed by the version number.
+
+**Q**: How do I install Java 11?<br>
+**A**: Download Java 11 JRE [here](https://adoptium.net/temurin/releases/?package=jre&version=11). Then follow their [installation guide](https://adoptium.net/installation/).
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSContacts home folder.
