@@ -28,10 +28,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_DUPLICATE_INDEX = "There is a duplicate Index listed.";
+    public static final String MESSAGE_DUPLICATE_INDEX = "There is a duplicate index listed.";
     public static final String MESSAGE_ROLE_CONSTRAINTS =
             "Roles should be either 'STUDENT', 'TA', or 'PROFESSOR', or an unambiguous prefix of it.";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
