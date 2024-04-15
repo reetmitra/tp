@@ -421,14 +421,20 @@ Team size: 5
 
 1. Currently, if any component (name, email, etc.) is too long, it will be hidden on the screen. We plan to implement
    appropriate mechanism to show the full component.
-3. Currently, `undo` only supports undoing one command. We plan to support undoing multiple commands.
-4. Currently, using the `edit` command to edit the tag list will delete all the existing tags and replace it with the
+2. Currently, `undo` only supports undoing one command. We plan to support undoing multiple commands.
+3. Currently, using the `edit` command to edit the tag list will delete all the existing tags and replace it with the
    new tags. We plan to have ways to edit it incrementally later.
-5. Currently, there's no way to make `search` more targeted; for example, if there are 3 entries in the address book with name `John Doe`, `Jane Doe` and `John Smith`, then there's no way to search for specifically `John Doe`. In the future, we plan to have a way to specify that multiple words must match exactly, and have a priority system where contacts that matches more keywords are shown earlier.
-7. Currently, duplicate phone number and email are not detected. We plan to detect them and warn the user of the
+4. Currently, there's no way to make `search` more targeted; for example, if there are 3 entries in the address book with name `John Doe`, `Jane Doe` and `John Smith`, then there's no way to search for specifically `John Doe`. In the future, we plan to have a way to specify that multiple words must match exactly, and have a priority system where contacts that matches more keywords are shown earlier.
+5. Currently, duplicate phone number and email are not detected. We plan to detect them and warn the user of the
    error.
-8. Currently, the result display cannot be resized to view the text in case the text is long. We plan to implement
+6. Currently, the result display cannot be resized to view the text in case the text is long. We plan to implement
    it later.
+7. Currently, address is mandatory if the role is `Professor`, but some profs/lecture track professors might not have offices.
+   We plan to implement a way to allow user have an empty address for `Professor` by using `f/`.
+8. Currently, error messages for special cases like `delete 0`, `delete 1,1,1` are not correct. 
+   We plan to implement to have correct error messages. 
+9. Currently, `f/` bypasses all invalid field value errors, not one of the errors. 
+   We plan to implement a way to bypass one by one.
 
 ## **Appendix: Instructions for manual testing**
 

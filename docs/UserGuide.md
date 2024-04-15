@@ -102,6 +102,7 @@ Shows a message listing out all the available commands and their purpose.
 Format: `help`
 
 For more information regarding the command formats and examples, press `F1` to open up a help window (as shown in the picture below).
+  * For some users with newer Macs, use `fn`+`F1` to open the help window.
 
 To close the help window, you can simply press `esc` on your keyboard. Windows users may also use 
 `alt`+`F4` or click on the `X` in the top right corner of the window.
@@ -137,8 +138,16 @@ This is mostly sufficient for you to know how to use the command. Here are some 
 | `t/TAG` | Tags of the contact. Similarly, `t/` with an empty tag is not supported. If you want to not include any tag, leave out `t/TAG` entirely.                                                                                                                                                                                         | `t/friend`             | Yes |
 | `f/` | Bypasses validation. Several fields have some validation rules (for example, you cannot use `ABCD` as a course code, since it does not conform to NUS course code format). Nevertheless, if you enter such a course code as input, the program will allow you to bypass the validation by adding `f/` to the end of the command. | `f/`                   | Yes |
 
-  :bulb: Note that `f/` must come at the end, or immediately before a tag. For example, `add f/ n/Alice …` is allowed, but `add
-  n/ f/ Alice …` is not allowed.
+<div markdown="block" class="alert alert-info">
+  :bulb: Note that `f/` must come at the end, or immediately before a tag. <br>
+  For example, `add f/ n/Alice e/alice@gmail.com r/STUDENT c/CS2103T` is allowed, but `add n/ f/ Alice …` or `add n/Alice e/ f/alice@gmail.com` is not allowed. 
+  Also, one `f/` bypasses all invalid field value errors. For example, `add f/ n/Alice e/ c/` bypasses to have empty email and course.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you want to add people with same name, you can add additional characters to add and differentiate them.
+For example, you can add two Alice by `n/Alice1` and `n/Alice2`.
+</div>
 
 #### Editing a contact: `edit`
 
@@ -239,6 +248,7 @@ Format: `delete INDEX1, INDEX2, INDEX3, …`
 * The indices do not need to be listed in order. (i.e. `2, 4, 6` is the same as `6, 2, 4`)
 * Listing the same index more than once will result in an error message being displayed.
 * Each `INDEX` must still adhere to the points listed above.
+* Whitespace between indices is not important. i.e. `delete 1,2,3` is the same as `delete 1, 2, 3`.
 
 Example:
 * `delete 3, 1, 7, 8` deletes the first, third, seventh, and eighth contact in the address book.
@@ -395,15 +405,15 @@ For example:
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE a/ADDRESS c/COURSE [t/TAG]… [p/PHONE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
-| [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                         |
-| [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
-| [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| [**Find**](#locating-contacts-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                                      |
-| [**List**](#listing-all-contacts-list)   | `list`                                                                                                                                                                          |
-| [**Help**](#viewing-help-help)   | `help`                                                                                                                                                                          |
-| [**Exit**](#exiting-the-program-exit)   | `exit`                                                                                                                                                                          |
-| [**Copy Email**](#copying-a-contacts-email-to-clipboard-copy)   | `copy INDEX`                                                                                                                                                                          |
-| [**Undo**](#undoing-the-last-command-undo)   | `undo`                                                                                                                                                                          |
+| Action     | Format, Examples                                                                                                                                                         |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-contact-add)    | `add n/NAME e/EMAIL r/ROLE c/COURSE [a/ADDRESS] [p/PHONE] [t/TAG]…[f/]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/STUDENT a/PGPR c/CS2103T t/friend` |
+| [**Clear**](#clearing-all-entries-clear)  | `clear`                                                                                                                                                                  |
+| [**Delete**](#deleting-a-contact-delete) | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
+| [**Edit**](#editing-a-contact-edit)   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [c/COURSE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                  |
+| [**Find**](#locating-contacts-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake CS2103T STUDENT`                                                                                               |
+| [**List**](#listing-all-contacts-list)   | `list`                                                                                                                                                                   |
+| [**Help**](#viewing-help-help)   | `help`                                                                                                                                                                   |
+| [**Exit**](#exiting-the-program-exit)   | `exit`                                                                                                                                                                   |
+| [**Copy Email**](#copying-a-contacts-email-to-clipboard-copy)   | `copy INDEX`                                                                                                                                                             |
+| [**Undo**](#undoing-the-last-command-undo)   | `undo`                                                                                                                                                                   |
