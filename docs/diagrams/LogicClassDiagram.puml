@@ -32,7 +32,7 @@ LogicManager -right->"1" ParserClasses
 ParserClasses ..> XYZCommand : creates >
 
 XYZCommand -up-|> Command
-LogicManager .down.> Command : executes >
+LogicManager .down.> Command : calls >
 
 LogicManager --> Model
 LogicManager --> Storage
