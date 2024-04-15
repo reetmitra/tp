@@ -49,7 +49,7 @@ If you can type fast, NUSContacts can get your contact management tasks done fas
 
 #### Command history
 
-You can navigate between past successful commands by pressing the `UP` and `DOWN` arrow keys.
+You can navigate between past successful commands and the current command by using the `UP` and `DOWN` arrow keys.
 
 #### Saving the data
 
