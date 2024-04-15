@@ -18,6 +18,8 @@ If you can type fast, NUSContacts can get your contact management tasks done fas
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. (Refer to [FAQ](#faq) on how to check your Java version and how to install it)
@@ -80,6 +82,24 @@ Furthermore, certain edits can cause the NUSContacts to behave in unexpected way
 
 <div style="page-break-after: always;"></div>
 
+### Glossary
+
+Here are the definition of the terms we use throughout the documentation.
+
+
+| Term               | Definition                                                                                                                                                                                                        |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command | An input from the user that instructs the program to perform an action e.g. ADD a contact. |
+| Command parameter | Some information that is provided to a command e.g. the name or phone number of a contact. |
+| Contact | A person that the user wants to keep track of. |
+| Optional parameter | A parameter that usually can be omitted from the command with no errors, unless specified otherwise. |
+| GUI | The visual display of NUSContacts. |
+| CLI | A text-based user interface to interact with the application. |
+
+[Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### List of all commands
 
 <div markdown="block" class="alert alert-info"> **:information_source: Notes about the command format:**
@@ -111,6 +131,7 @@ Furthermore, certain edits can cause the NUSContacts to behave in unexpected way
   characters.
 </div>
 
+<div style="page-break-after: always;"></div>
 
 #### Viewing help: `help`
 
@@ -397,6 +418,8 @@ For example:
     ```
 
     Other characters should not be escaped.
+
+<div style="page-break-after: always;"></div>
 
 * Here are more examples.
 
