@@ -3,7 +3,7 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
 ## CS2103T T11-2 Team Members
 
@@ -50,4 +50,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[Github](https://github.com/Hibeom0929)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Testing
