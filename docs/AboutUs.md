@@ -50,4 +50,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[Github](https://github.com/Hibeom0929)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Testing
