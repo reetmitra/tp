@@ -9,7 +9,10 @@ Whether you're organizing peer groups, keeping track of tutors, or connecting wi
 Our platform combines the simplicity of a Command Line Interface (CLI) with an intuitive Graphical User Interface (GUI), providing users with the best of both worlds.
 If you can type fast, NUSContacts can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
+
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
